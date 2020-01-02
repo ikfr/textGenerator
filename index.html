@@ -1,309 +1,687 @@
-<html>
-  <head>
-    <title>狗屁不通文章生成器</title>
-    <meta http-equiv="content-type" content="txt/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="icon" href="data:image/ico;base64,aWNv">
-    <script src="https://hm.baidu.com/hm.js?058d1e446dd338b69f2e385ba2f930f2"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BM8WXEWW3P"></script>
-  </head>
-  <body>
-    <div id="主体">
-      <div id="标题">文章生成器</div>
-      <div id="主题">
-        <span>主题</span>
-        <input></input>
-        <button onclick="生成文章()">生成</button>
-      </div>
-      <div id="文章"></div>
-    </div>
-    <div id="声明">
-      <p id="声明文字">请勿将生成的文章用于正规用途</p>
-      <p><a class="链接" href="声明.txt">声明</a></p>
-    </div>
-    <div id="页脚">
-      <p>
-        网页版
-        <a class="链接" href="https://github.com/suulnnka/BullshitGenerator"><svg class="图标" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
-        @<a class="链接" href="https://www.zhihu.com/people/su-lan-qia">suulnnka</a>
-       </p>
-      <p>
-        原版
-        <a class="链接" href="https://github.com/menzi11/BullshitGenerator"><svg class="图标" viewBox="0 0 16 16" version="1.1" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
-        @<a class="链接" href="https://www.zhihu.com/people/ke-meng-90">menzi11</a>
-      </p>
-    </div>
-  </body>
-</html>
+<!DOCTYPE html>
+<head>
+<title>娱乐报告生成器 2019</title>
 
+<meta http-equiv="content-type" content="txt/html; charset=utf-8"></head>
 <script>
-let _hmt = window._hmt || [];
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-BM8WXEWW3P');
-
-function track(eventName, title, seed) {
-    gtag('event', eventName, {'event_label': title,'seed': seed,'title_seed':title+'_'+seed});
-    _hmt.push(['_trackEvent', eventName, 'title', title]);
-    _hmt.push(['_trackEvent', eventName, 'title_seed', title+'_'+seed]);
-}
-
 window.$ = function (selector) {
-    return document.querySelector(selector);
+  return document.querySelector(selector);
 }
-
-function 获取网址参数(参数) {
-    return new URL(window.location.href).searchParams.get(参数)
-}
-
-let 论述 = [
-    '现在，解决主题的问题，是非常非常重要的。 所以， ',
-    '我们不得不面对一个非常尴尬的事实，那就是， ',
-    '主题的发生，到底需要如何做到，不主题的发生，又会如何产生。 ',
-    '而这些并不是完全重要，更加重要的问题是， ',
-    '主题，到底应该如何实现。 ',
-    '带着这些问题，我们来审视一下主题。 ',
-    '所谓主题，关键是主题需要如何写。 ',
-    '我们一般认为，抓住了问题的关键，其他一切则会迎刃而解。 ',
-    '问题的关键究竟为何？ ',
-    '主题因何而发生？ ',
-    '每个人都不得不面对这些问题。 在面对这种问题时， ',
-    '一般来讲，我们都必须务必慎重的考虑考虑。 ',
-    '要想清楚，主题，到底是一种怎么样的存在。 ',
-    '了解清楚主题到底是一种怎么样的存在，是解决一切问题的关键。 ',
-    '就我个人来说，主题对我的意义，不能不说非常重大。 ',
-    '本人也是经过了深思熟虑，在每个日日夜夜思考这个问题。 ',
-    '主题，发生了会如何，不发生又会如何。 ',
-    '在这种困难的抉择下，本人思来想去，寝食难安。 ',
-    '生活中，若主题出现了，我们就不得不考虑它出现了的事实。 ',
-    '这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 ',
-    '我们都知道，只要有意义，那么就必须慎重考虑。 ',
-    '既然如此， ',
-    '那么， ',
-    '我认为， ',
-    '一般来说， ',
-    '总结的来说， ',
-    '既然如何， ',
-    '经过上述讨论， ',
-    '这样看来， ',
-    '从这个角度来看， ',
-    '可是，即使是这样，主题的出现仍然代表了一定的意义。 ',
-    '对我个人而言，主题不仅仅是一个重大的事件，还可能会改变我的人生。 '
+//句子库
+//证言务虚
+let 泛相关 = [
+"The literature on 主题 has highlighted several …",
+"Different theories exist in the literature regarding …",
+"More recent attention has focused on the provision of …",
+"There are relatively few historical studies in the area of …",
+"A large and growing body of literature has investigated …",
+"Much of the literature since the mid-时间 emphasises the …",
+"Much of the current literature on 主题 pays particular attention to …",
+"There is a large volume of published studies describing the role of …",
+"The existing literature on 主题 is extensive and focuses particularly on …",
+"There is a relatively small body of literature that is concerned with …",
+"The generalisability of much published research on this issue is problematic.",
+"A considerable amount of literature has been published on 主题. These studies …",
+"Previous research findings into 主题 have been inconsistent and contradictory (作者, 时间; …).",
+"The academic literature on 主题 has revealed the emergence of several contrasting themes.",
+]
+let 远相关 = [
+"Research into 主题 has a long history.",
+"For many years, this phenomenon was surprisingly neglected by …",
+"Only in the past ten years have studies of 主题 directly addressed how …",
+"Prior to the work of 作者 (时间), the role of 主题 was largely unknown.",
+"Over the past decade, most research in 主题 has emphasized the use of …",
+"In recent years, there has been an increasing amount of literature on …",
+"Early examples of research into 主题 include … (作者, 时间).",
+"During the past 30 years, much more information has become available on …",
+"The first serious discussions and analyses of 主题 emerged during the 时间 with …",
+"Over the past two decades, major advances in 上级 have allowed …",
+"Historically, research investigating the factors associated with 主题 has focused on …",
+"It is only since the work of 作者 (时间) that the study of 主题 has gained momentum.",
+"The construct of 主题 was first articulated by 作者 (时间) and popularised in his book: …",
+"Around the early 时间, small-scale research and case studies began to emerge linking …",
+"It was not until the late 时间 that historians considered 主题 worthy of scholarly attention.",
+"Awareness of 主题 is not recent, having possibly first been described in the 5th century BCE by …",
+]
+let 域相关 = [
+"To date, several studies have investigated 主题 …",
+"A number of studies have begun to examine 主题 …",
+"Various studies have assessed the efficacy of 主题 …",
+"Researchers attempted to evaluate the impact of 主题 …",
+"A great deal of previous research into 主题 has focused on …",
+"Several studies have used longitudinal data to examine …",
+"Previous studies have explored the relationships between 主题 and 同义词.",
+"Twenty cohort study analyses have examined the relationship between …",
+"A number of authors have considered the effects of … (作者, 时间).",
+"At least 120 case-control studies worldwide have examined the relationship between 主题 and 同义词 …",
+"Numerous studies have attempted to explain … (for example, 作者, 时间).",
+]
+let 近相关 = [
+"Several lines of 上级 evidence suggest that …",
+"Previous 上级 research has established that …",
+"Data from several studies suggest that …",
+"It is now well established from a variety of studies that …",
+"A number of 上级 studies have postulated a convergence between …",
+"Surveys such as that conducted by 作者 (时间) have shown that …",
+"Many recent studies (e.g. 作者, 时间; 作者, 时间) have shown that …",
+"Traditionally, it has been argued that … (e.g. 作者, 时间).",
+"Severalresearchers of 上级 have been published. 作者 (时间) presents …",
+"In previous studies on 主题, different variables have been found to be related to …",
+"Many 上级 researchers have argued that … (e.g. 作者, 时间).",
+"There is a consensus among social scientists that … (e.g. 作者, 时间",
+"Data from several sources have identified the increased 主题 and 同义词 associated with obesity.",
+"It has been demonstrated that a high intake of 主题 results in damage to … (作者, 时间; …).",
+"There is a large number of published studies of 上级 (e.g., 作者, 时间) that describe …",
+"Some cross-sectional studies suggest an association between 主题 and 同义词 (作者, 时间).",
+"It has been suggested that levels of 主题 are independent of the size of the 同义词 (作者 et al., 时间).",
+"It has conclusively been shown that 主题 and 同义词 increase 近义词 (作者 et al., 时间).",
+]
+let 现相关 = [
+"主题, 同义词 and 近义词 appear to be closely linked (作者, 时间).",
+"主题 appears to be positively related to both 同义词 and 近义词 (作者, 时间)",
+"主题 is a principal determining factor of 同义词 (作者, 时间; 作者, 时间).",
+"主题 is one of the most intense reactions following CHD (作者, 时间).",
+"There is an unambiguous relationship between 主题 and 同义词 (作者, 时间).",
+"主题 is significantly reduced during the first months of … (作者, 时间; 作者, 时间).",
+"主题 has been found to oppose the anti-inflammatory actions of 同义词 on 近义词 (作者, 时间).",
+"GM varieties of maize are able to cross-pollinate with non-GM varieties (作者, 时间) …",
+"A relationship exists between an individual’s working memory and their ability to … (作者, 时间).",
+]
+//务实
+let 前方法 = [
+"Most research on 主题 has been carried out in …",
+"Most researchers investigating 主题 have utilised …",
+"Using this approach, researchers have been able to …",
+"Several systematic reviews of 主题 have been undertaken.",
+"The vast majority of studies on 主题 have been quantitative.",
+"What we know about 主题 is largely based on observational studies.",
+"There are a number of large cross-sectional studies which suggest …",
+"Much of the previous research on 主题 has been exploratory in nature.",
+"Much of the 主题 research has focused on identifying and evaluating the …",
+"What we know about 主题 is largely based upon empirical studies that investigate how …",
+"Publications that concentrate on 主题 more frequently adopt a historical or chronological approach …",
+]
+let 前人员 = [
+"作者 compared the rate of 主题 …",
+"作者 labelled these subsets as …",
+"作者 measured both components of the 主题 and 同义词 …",
+"作者 used a survey to assess the various …",
+"作者 identified that 主题 as …",
+"作者 set up a series of virtual experiments using …",
+"作者 examined the flow of international students …",
+"作者 carried out a number of investigations into the …",
+"作者 studied the effects of 主题 on unprotected nerve cells.",
+"作者 analysed the data from 72 countries and concluded that …",
+"作者 interviewed 250 undergraduate students using semi-structured …",
+"作者 performed a similar series of experiments in 时间 to show that …",
+"作者 reviewed the literature from the period and found little evidence for this …",
+"作者 conducted a series of trials in which he mixed 主题 with different quantities of …",
+"作者 investigated the differential impact of formal and non-formal education on …",
+]
+let 前时间 = [
+"In 时间, a seminal article was published entitled …",
+"In 时间, Brown performed a bilateral ablation of the …",
+"In 时间, the publication of 主题 had a major impact on …",
+"In 时间, 作者 published his major historic survey of …",
+"In 时间, 作者 et al. published a paper in which they described …",
+"In 时间, 作者 et al. made several amino acid esters of 主题 and evaluated them as …",
+"In 时间, 作者 and co-workers demonstrated that 主题 induced in vitro resistance to …",
+"In 时间, 作者 et al. demonstrated that replacement of H2O with heavy water led to …",
+"In 时间, 作者 et al. reported a new and convenient synthetic procedure to obtain …",
+"Thirty years later, 作者 (时间) reported three cases of 主题 which …",
+"In the 时间, 作者 pointed to some of the ways in which …",
+"Following World War 1, 作者 actively searched for 主题.",
+"Almost 20 years ago, 作者 (时间) formulated his 主题 theory, centred around …",
+]
+let 前研究 = [
+"One longitudinal study found that 主题 …",
+"A seminal study in this area is the work of 主题 …",
+"One study by 作者 (时间) examined the trend in 主题 …",
+"A recent study by 作者 and 作者 (时间) involved 主题 …",
+"A qualitative study by 作者 (时间) described how 主题 …",
+"A recent systematic literature review concluded that 主题 …",
+"Preliminary work on 主题 was undertaken by 作者 (时间).",
+"A longitudinal study of 主题 by 作者 (时间) reports that …",
+"A key study comparing 主题 and 同义词 is that of 作者 (时间), in which …",
+"The first systematic study of 主题 was reported by 作者 et al. in 时间.",
+"Detailed examination of 主题 by 作者 and 作者 (时间) showed that …",
+"Analysis of the genes involved in 主题 was first carried out by 作者 et al. (时间).",
+"A significant analysis and discussion on the subject was presented by 作者 (时间).",
+"The study of the structural behaviour of 主题 was first carried out by 作者 et al. (时间).",
+"A small scale study by 作者 (时间) reached different conclusions, finding no increase in …",
+"The study by 作者 (时间) offers probably the most comprehensive empirical analysis of …",
+"In an analysis of 主题, 作者 et al. (时间) found …",
+"In a follow-up study, 作者 et al. (时间) found that …",
+"In an investigation into 主题, 作者 et al. (时间) found …",
+"In a study investigating 主题, 作者 (时间) reported that …",
+"In a comprehensive study of 主题, 作者 (时间) found that …",
+"In a study conducted by 作者 (时间), it was shown that …",
+"In studies of rats given 主题, 作者 and colleagues found that …",
+"In a study which set out to determine 主题, 作者 (时间) found that …",
+"In a randomised controlled study of 主题, 作者 (时间) reported that …",
+"In another major study, 作者 (时间) found that just over half of the …",
+"In a recent cross-sectional study, 作者 (时间) investigated whether …",
+"In a large longitudinal study, 作者 et al. (时间) investigated the incidence of 主题 in 同义词.",
+"In one well-known recent experiment, limits on 主题 were found to be … (作者, 时间)",
+]
+let 前话题 = [
+"To determine the effects of 主题, 作者 et al. (时间) compared …",
+"主题 was originally isolated from 同义词 in a soil sample from … (作者 et al., 时间).",
+"The electronic spectroscopy of 主题 was first studied by 作者 and 作者 in 时间.",
+"主题 formed the central focus of a study by 作者 (时间) in which the author found …",
+"To better understand the mechanisms of 主题 and its effects, 作者 (时间) analysed the …",
+"主题 was first demonstrated experimentally by 作者 (作者, 时间). In his seminal study …",
+"The 上级 relationship reaction between 主题 and 同义词 was first reported by 作者 in 时间.",
+"The way in which 主题 is regulated was studied extensively by 作者 and colleagues (作者 et al. 时间 and 时间).",
+]
+//结构
+let 前关系 = [
+"In this chapter, 作者 provides us with a number of important …",
+"In the subsequent chapter, 作者 examines the extent to which …",
+"By drawing on the concept of 主题, 作者 has been able to show that …",
+"Some analysts (e.g. 作者, 时间) have attempted to draw fine distinctions between …",
+"Drawing on an extensive range of sources, the authors set out the different ways in which …",
+"Other authors (see 作者, 时间) question the usefulness of such an approach.",
+]
+let 前总结 = [
+"Similarly, 作者 (时间) found that 主题 …",
+"In the same vein, 作者 (时间) in his book 主题, 同义词 and 近义词 notes …",
+"This view is supported by 作者 (时间) who writes that …",
+"作者 argues that her data support 作者’s (时间) view that …",
+"作者’s (时间) work on 主题 is complemented by 作者’s (时间) study of …",
+"Almost every paper that has been written on 主题 includes a section relating to …",
+"Unlike 作者, 作者 (时间) argues that …",
+"In contrast to 作者, 作者 (时间) argues that …",
+"A broader perspective has been adopted by 作者 (时间) who argues that …",
+"Conversely, 作者 (时间) reported no significant difference in mortality between 主题 and 同义词.",
+]
+//内容
+let 作者 = [
+"Zhao",
+"Qian",
+"Sun",
+"Li",
+"Zhou",
+"Wu",
+"Zheng",
+"Wang",
+"Feng",
+"Chen",
+"Chu",
+"Wei",
+"Jiang",
+"Shen",
+"Han",
+"Yang",
+]
+let 时间 = [
+"2001",
+"2002",
+"2003",
+"2004",
+"2005",
+"2006",
+"2007",
+"2008",
+"2009",
+"2010",
+"2011",
+"2012",
+]
+//方法务虚
+let 前方法1 = [
+"Many researchers have utilised 方法 to measure …",
+"One of the most well-known tools for assessing …",
+"Traditionally, 方法 has been assessed by measuring …",
+"A number of techniques have been developed to …",
+"Different methods have been proposed to classify …",
+"方法 is the main non-invasive method used to determine …",
+"Different authors have measured 方法 in a variety of ways.",
+"Several methods currently exist for the measurement of 方法.",
+"Previous studies have based their criteria for selection on …",
+"方法 is one of the most common procedures for determining …",
+"There are three main types of study design used to identify …",
+"The use of life story data has a relatively long tradition within 方法.",
+"Recent advances in 方法 methods have facilitated investigation of …",
+"There are a number of instruments available for measuring the …",
+"方法 and 同义词 are currently the most popular methods for investigating …",
+"Recently, simpler and more rapid tests of 方法 have been developed.",
+"In most recent studies, 方法 has been measured in four different ways.",
+"The use of qualitative case studies is a well-established approach in …",
+"方法s have been used in the past to investigate the mechanical properties of …",
+]
+let 近方法 = [
+"A major advantage of 方法 is that …",
+"The benefit of this approach is that …",
+"方法 based methods provide a means of …",
+"方法 was selected for its reliability and validity.",
+"A case study approach was used to allow a …",
+"This method is particularly useful in studying …",
+"A quantitative approach was employed since …",
+"Qualitative methods offer an effective way of …",
+"The design of the questionnaires was based on …",
+"The 方法 method is one of the more practical ways of …",
+"The semi-structured approach was chosen because …",
+"The 方法 approach has a number of attractive features: …",
+"The advantages of 方法s are that they are simple to deliver.",
+"The second advantage of using the multivariate method is …",
+"The study uses qualitative analysis in order to gain insights into …",
+"One advantage of the 方法 analysis is that it avoids the problem of …",
+"Another advantage of using computer simulations is that it allows …",
+"Continuous sampling methods have a number of advantages over …",
+"The collaborative nature of the focus group offers another advantage …",
+"Qualitative methods can be more useful for identifying and characterising …",
+"A major problem with the experimental method is that …",
+"The main disadvantage of the experimental method is that …",
+"However, there are certain drawbacks associated with the use of …",
+"There are certain problems with the use of focus groups. One of these is that there is less …",
+]
+let 源方法 = [
+"The solution was then assayed for 主题 using the 方法 method.",
+"方法 was prepared according to the procedure used by 作者. (时间).",
+"The analysis of 主题 was done by 方法 according to the procedure of 作者 (时间).",
+"主题 was tested with the same method that was detailed for 同义词, using 方法 …",
+"Samples were analysed for 主题 as previously reported by 作者 et al. (时间).",
+"Analysis was based on the 方法 proposed by 作者 et al. (时间).",
+"This 主题 was prepared by the procedure of 方法 used by 作者 et al. (时间) …",
+]
+let 样本征 = [
+"The cohort was divided into two groups according to …",
+"A random sample of patients with … was recruited from …",
+"Articles were searched from January 时间 until April 时间.",
+"The sample was representative with respect to gender and …",
+"Forty-seven students studying 主题 were recruited for this study.",
+"A systematic literature review was conducted of studies that …",
+"Just over half the sample (53%) was female, of whom 69% were …",
+"Of the initial cohort of 123 students, 66 were female and 57 male.",
+"Eligible women who matched the selection criteria were identified by …",
+"Only children aged between 10 and 15 years were included in the study.",
+"The participants were divided into two groups based on their performance on …",
+"Two groups of subjects were interviewed, namely 主题 and 同义词. The first group were …",
+"The project used a convenience sample of 32 first year modern languages students.",
+"All of the participants were aged between 18 and 19 at the beginning of the study …",
+"All studies described as using some sort of 主题 procedure were included in the analysis.",
+"Participants were recruited from 15 clinics across …, covering urban and rural areas …",
+"The initial sample consisted of 200 students, 75 of whom belonged to minority groups.",
+]
+let 样本基 = [
+"Criteria for selecting the subjects were as follows:",
+"Publications were only included in the analysis if …",
+"The participants in this study were recruited from …",
+"To identify 主题, the following parameters were used: …",
+"The area of study was chosen for its relatively small …",
+"Primary inclusion criteria for the 主题 participants were …",
+"Eligibility criteria required individuals to have received …",
+"Five individuals were excluded from the study on the basis of …",
+"A small sample was chosen because of the expected difficulty in obtaining …",
+"The subjects were selected on the basis of the degree of homogeneity of their …",
+"A comparison group of 12 male subjects without any history of 主题 was drawn from a pool of …",
+]
+let 方法意 = [
+"In order to identify 主题 …, the participants were asked to …",
+"In order to understand how 主题 regulates 同义词, a series of transfections was performed.",
+"To establish whether …,",
+"To measure 主题, a question asking … was used.",
+"To determine whether …, the 特征 were incubated for …",
+"To rule out the possibility that 主题, the participants were …",
+"To control for bias, measurements were carried out by another person.",
+"To assess whether and how 主题s are produced and received, we measured …",
+"To see if the two methods gave the same measurement, the data was plotted and …",
+"To enable the subjects to see the computer screen clearly, the laptop was configured with …",
+"To increase the reliability of measures, each 主题 was tested twice with a 4-minute break between …",
+"To compare the scores three weeks after initial screening, a global ANOVA F-test was used",
+"The vials were capped with … to prevent …",
+"The process was repeated several times in order to remove …",
+"In an attempt to make each interviewee feel as comfortable as possible, the interviewer …",
+]
+let 总步骤 = [
+"For the 特征 questions, a Likert scale was used.",
+"For the purpose of 特征 measurement, subjects were asked to stand …",
+"For the purpose of analysis 特征 of 主题, two segments were extracted from each …",
+"For the estimation of 特征, 主题 sample was mixed with …",
+]
+let 被步骤 = [
+"All participants were sent …",
+"The data were normalised using …",
+"Ethical approval was obtained from …",
+"Drugs were administered by icv injection …",
+"Descriptive data were generated for all variables.",
+"The procedures of this study were approved by …",
+"Prompts were used as an aid to question two so that …",
+"Data were collected using semi-structured interviews in …",
+"Participants were thanked for their time and effort and for …",
+"The experiments were run using custom software written in …",
+"Two sets of anonymised questionnaires were completed by …",
+"A total of 256 samples were taken from 52 boreholes (Figure 11).",
+"The solution was washed three times with deionized water and …",
+"Significance levels were set at the 1% level using the student t-test.",
+"Data management and analysis were performed using SPSS 16.0 (2010).",
+"Published studies were identified using a search strategy developed in …",
+"Data were gathered from multiple sources at various time points during …",
+"Injection solutions were coded by a colleague to reduce experimenter bias.",
+"The pilot interviews were conducted informally by the trained interviewer …",
+"Article references were searched further for additional relevant publications …",
+]
+let 步骤前 = [
+"To begin this process, …",
+"The first step in this process was to …",
+"The second method used to identify 主题 involved …",
+"The subjects were then shown a film individually and were asked to …",
+"The 主题 was then tested again, and this weight was recorded as …",
+"The results were corrected for the background readings and then averaged before …",
+"These ratings were then made for the ten stimuli to which the subject had been exposed …",
+"The analysis was checked when initially performed and then checked again at the end of …",
+"Finally, questions were asked as to the role of …",
+"In the follow-up phase of the study, participants were asked …",
+"The final stage of the study comprised a semi-structured interview with participants who …",
+]
+let 步骤度 = [
+"The 特征 was then aseptically transferred to a conical flask.",
+"A sample of the concentrate was then carefully injected into …",
+"The tubes were accurately reweighed to six decimal places using …",
+"The 特征 was then placed in a 上级 tool and gradually test to …",
+"The 特征 were taken manually to allow the soil to mix well with the water.",
+"The resulting solution was gently mixed at room temperature for ten minutes and …",
+]
+let 分析器 = [
+"Data were collected using two 方法s of 主题s.",
+"Semi-automated 方法 was carried out using 主题 software and …",
+"Using the 方法 and looking at the actual 特征, it was possible to identify that 主题 …",
+"Comparisons between the two groups of 主题 were made using unrelated t-tests.",
+"The data were recorded on 方法 recorder and transcribed using a 特征 analyser …",
+"Statistical significance was analysed using analysis of variance and t-tests as appropriate.",
+"Using an 方法, we were able to separate single 特征 into different …",
+"15 subjects of 上级 were recruited using 方法 requesting 主题 and 同义词 from …",
+"All the 方法 on the computer was carried out using Quattro Pro for Windows and …",
+]
+let 方法缺 = [
+"In particular, the analysis of 主题 was problematic.",
+"In observational studies, there is a potential for 特征 bias from …",
+"The small size of the dataset meant that it was not possible to …",
+"Further data collection is required to determine exactly how 主题 affects 同义词.",
+"Another major source of uncertainty is in the method used to calculate 主题.",
+"In this investigation there are several sources for error. The main error is …",
+"It was not possible to investigate the significant relationships of 主题 and 同义词 further because …",
+"The responses relating to 主题 were subjective and were therefore susceptible to recall bias.",
 ]
 
-let 名人名言 = [
-    '伏尔泰曾经说过，不经巨大的困难，不会有伟大的事业。这不禁令我深思',
-    '富勒曾经说过，苦难磨炼一些人，也毁灭另一些人。这不禁令我深思',
-    '文森特·皮尔曾经说过，改变你的想法，你就改变了自己的世界。这不禁令我深思',
-    '拿破仑·希尔曾经说过，不要等待，时机永远不会恰到好处。这不禁令我深思',
-    '塞涅卡曾经说过，生命如同寓言，其价值不在与长短，而在与内容。这不禁令我深思',
-    '奥普拉·温弗瑞曾经说过，你相信什么，你就成为什么样的人。这不禁令我深思',
-    '吕凯特曾经说过，生命不可能有两次，但许多人连一次也不善于度过。这不禁令我深思',
-    '莎士比亚曾经说过，人的一生是短的，但如果卑劣地过这一生，就太长了。这不禁令我深思',
-    '笛卡儿曾经说过，我的努力求学没有得到别的好处，只不过是愈来愈发觉自己的无知。这不禁令我深思',
-    '左拉曾经说过，生活的道路一旦选定，就要勇敢地走到底，决不回头。这不禁令我深思',
-    '米歇潘曾经说过，生命是一条艰险的峡谷，只有勇敢的人才能通过。这不禁令我深思',
-    '吉姆·罗恩曾经说过，要么你主宰生活，要么你被生活主宰。这不禁令我深思',
-    '日本谚语曾经说过，不幸可能成为通向幸福的桥梁。这不禁令我深思',
-    '海贝尔曾经说过，人生就是学校。在那里，与其说好的教师是幸福，不如说好的教师是不幸。这不禁令我深思',
-    '杰纳勒尔·乔治·S·巴顿曾经说过，接受挑战，就可以享受胜利的喜悦。这不禁令我深思',
-    '德谟克利特曾经说过，节制使快乐增加并使享受加强。这不禁令我深思',
-    '裴斯泰洛齐曾经说过，今天应做的事没有做，明天再早也是耽误了。这不禁令我深思',
-    '歌德曾经说过，决定一个人的一生，以及整个命运的，只是一瞬之间。这不禁令我深思',
-    '卡耐基曾经说过，一个不注意小事情的人，永远不会成就大事业。这不禁令我深思',
-    '卢梭曾经说过，浪费时间是一桩大罪过。这不禁令我深思',
-    '康德曾经说过，既然我已经踏上这条道路，那么，任何东西都不应妨碍我沿着这条路走下去。这不禁令我深思',
-    '克劳斯·莫瑟爵士曾经说过，教育需要花费钱，而无知也是一样。这不禁令我深思',
-    '伏尔泰曾经说过，坚持意志伟大的事业需要始终不渝的精神。这不禁令我深思',
-    '亚伯拉罕·林肯曾经说过，你活了多少岁不算什么，重要的是你是如何度过这些岁月的。这不禁令我深思',
-    '韩非曾经说过，内外相应，言行相称。这不禁令我深思',
-    '富兰克林曾经说过，你热爱生命吗？那么别浪费时间，因为时间是组成生命的材料。这不禁令我深思',
-    '马尔顿曾经说过，坚强的信心，能使平凡的人做出惊人的事业。这不禁令我深思',
-    '笛卡儿曾经说过，读一切好书，就是和许多高尚的人谈话。这不禁令我深思',
-    '塞涅卡曾经说过，真正的人生，只有在经过艰难卓绝的斗争之后才能实现。这不禁令我深思',
-    '易卜生曾经说过，伟大的事业，需要决心，能力，组织和责任感。这不禁令我深思',
-    '歌德曾经说过，没有人事先了解自己到底有多大的力量，直到他试过以后才知道。这不禁令我深思',
-    '达尔文曾经说过，敢于浪费哪怕一个钟头时间的人，说明他还不懂得珍惜生命的全部价值。这不禁令我深思',
-    '佚名曾经说过，感激每一个新的挑战，因为它会锻造你的意志和品格。这不禁令我深思',
-    '奥斯特洛夫斯基曾经说过，共同的事业，共同的斗争，可以使人们产生忍受一切的力量。　这不禁令我深思',
-    '苏轼曾经说过，古之立大事者，不惟有超世之才，亦必有坚忍不拔之志。这不禁令我深思',
-    '王阳明曾经说过，故立志者，为学之心也；为学者，立志之事也。这不禁令我深思',
-    '歌德曾经说过，读一本好书，就如同和一个高尚的人在交谈。这不禁令我深思',
-    '乌申斯基曾经说过，学习是劳动，是充满思想的劳动。这不禁令我深思',
-    '别林斯基曾经说过，好的书籍是最贵重的珍宝。这不禁令我深思',
-    '富兰克林曾经说过，读书是易事，思索是难事，但两者缺一，便全无用处。这不禁令我深思',
-    '鲁巴金曾经说过，读书是在别人思想的帮助下，建立起自己的思想。这不禁令我深思',
-    '培根曾经说过，合理安排时间，就等于节约时间。这不禁令我深思',
-    '屠格涅夫曾经说过，你想成为幸福的人吗？但愿你首先学会吃得起苦。这不禁令我深思',
-    '莎士比亚曾经说过，抛弃时间的人，时间也抛弃他。这不禁令我深思',
-    '叔本华曾经说过，普通人只想到如何度过时间，有才能的人设法利用时间。这不禁令我深思',
-    '博曾经说过，一次失败，只是证明我们成功的决心还够坚强。 维这不禁令我深思',
-    '拉罗什夫科曾经说过，取得成就时坚持不懈，要比遭到失败时顽强不屈更重要。这不禁令我深思',
-    '莎士比亚曾经说过，人的一生是短的，但如果卑劣地过这一生，就太长了。这不禁令我深思',
-    '俾斯麦曾经说过，失败是坚忍的最后考验。这不禁令我深思',
-    '池田大作曾经说过，不要回避苦恼和困难，挺起身来向它挑战，进而克服它。这不禁令我深思',
-    '莎士比亚曾经说过，那脑袋里的智慧，就像打火石里的火花一样，不去打它是不肯出来的。这不禁令我深思',
-    '希腊曾经说过，最困难的事情就是认识自己。这不禁令我深思',
-    '黑塞曾经说过，有勇气承担命运这才是英雄好汉。这不禁令我深思',
-    '非洲曾经说过，最灵繁的人也看不见自己的背脊。这不禁令我深思',
-    '培根曾经说过，阅读使人充实，会谈使人敏捷，写作使人精确。这不禁令我深思',
-    '斯宾诺莎曾经说过，最大的骄傲于最大的自卑都表示心灵的最软弱无力。这不禁令我深思',
-    '西班牙曾经说过，自知之明是最难得的知识。这不禁令我深思',
-    '塞内加曾经说过，勇气通往天堂，怯懦通往地狱。这不禁令我深思',
-    '赫尔普斯曾经说过，有时候读书是一种巧妙地避开思考的方法。这不禁令我深思',
-    '笛卡儿曾经说过，阅读一切好书如同和过去最杰出的人谈话。这不禁令我深思',
-    '邓拓曾经说过，越是没有本领的就越加自命不凡。这不禁令我深思',
-    '爱尔兰曾经说过，越是无能的人，越喜欢挑剔别人的错儿。这不禁令我深思',
-    '老子曾经说过，知人者智，自知者明。胜人者有力，自胜者强。这不禁令我深思',
-    '歌德曾经说过，意志坚强的人能把世界放在手中像泥块一样任意揉捏。这不禁令我深思',
-    '迈克尔·F·斯特利曾经说过，最具挑战性的挑战莫过于提升自我。这不禁令我深思',
-    '爱迪生曾经说过，失败也是我需要的，它和成功对我一样有价值。这不禁令我深思',
-    '罗素·贝克曾经说过，一个人即使已登上顶峰，也仍要自强不息。这不禁令我深思',
-    '马云曾经说过，最大的挑战和突破在于用人，而用人最大的突破在于信任人。这不禁令我深思',
-    '雷锋曾经说过，自己活着，就是为了使别人过得更美好。这不禁令我深思',
-    '布尔沃曾经说过，要掌握书，莫被书掌握；要为生而读，莫为读而生。这不禁令我深思',
-    '培根曾经说过，要知道对好事的称颂过于夸大，也会招来人们的反感轻蔑和嫉妒。这不禁令我深思',
-    '莫扎特曾经说过，谁和我一样用功，谁就会和我一样成功。这不禁令我深思',
-    '马克思曾经说过，一切节省，归根到底都归结为时间的节省。这不禁令我深思',
-    '莎士比亚曾经说过，意志命运往往背道而驰，决心到最后会全部推倒。这不禁令我深思',
-    '卡莱尔曾经说过，过去一切时代的精华尽在书中。这不禁令我深思',
-    '培根曾经说过，深窥自己的心，而后发觉一切的奇迹在你自己。这不禁令我深思',
-    '罗曼·罗兰曾经说过，只有把抱怨环境的心情，化为上进的力量，才是成功的保证。这不禁令我深思',
-    '孔子曾经说过，知之者不如好之者，好之者不如乐之者。这不禁令我深思',
-    '达·芬奇曾经说过，大胆和坚定的决心能够抵得上武器的精良。这不禁令我深思',
-    '叔本华曾经说过，意志是一个强壮的盲人，倚靠在明眼的跛子肩上。这不禁令我深思',
-    '黑格尔曾经说过，只有永远躺在泥坑里的人，才不会再掉进坑里。这不禁令我深思',
-    '普列姆昌德曾经说过，希望的灯一旦熄灭，生活刹那间变成了一片黑暗。这不禁令我深思',
-    '维龙曾经说过，要成功不需要什么特别的才能，只要把你能做的小事做得好就行了。这不禁令我深思',
-    '郭沫若曾经说过，形成天才的决定因素应该是勤奋。这不禁令我深思',
-    '洛克曾经说过，学到很多东西的诀窍，就是一下子不要学很多。这不禁令我深思',
-    '西班牙曾经说过，自己的鞋子，自己知道紧在哪里。这不禁令我深思',
-    '拉罗什福科曾经说过，我们唯一不会改正的缺点是软弱。这不禁令我深思',
-    '亚伯拉罕·林肯曾经说过，我这个人走得很慢，但是我从不后退。这不禁令我深思',
-    '美华纳曾经说过，勿问成功的秘诀为何，且尽全力做你应该做的事吧。这不禁令我深思',
-    '俾斯麦曾经说过，对于不屈不挠的人来说，没有失败这回事。这不禁令我深思',
-    '阿卜·日·法拉兹曾经说过，学问是异常珍贵的东西，从任何源泉吸收都不可耻。这不禁令我深思',
-    '白哲特曾经说过，坚强的信念能赢得强者的心，并使他们变得更坚强。 这不禁令我深思',
-    '查尔斯·史考伯曾经说过，一个人几乎可以在任何他怀有无限热忱的事情上成功。 这不禁令我深思',
-    '贝多芬曾经说过，卓越的人一大优点是：在不利与艰难的遭遇里百折不饶。这不禁令我深思',
-    '莎士比亚曾经说过，本来无望的事，大胆尝试，往往能成功。这不禁令我深思',
-    '卡耐基曾经说过，我们若已接受最坏的，就再没有什么损失。这不禁令我深思',
-    '德国曾经说过，只有在人群中间，才能认识自己。这不禁令我深思',
-    '史美尔斯曾经说过，书籍把我们引入最美好的社会，使我们认识各个时代的伟大智者。这不禁令我深思',
-    '冯学峰曾经说过，当一个人用工作去迎接光明，光明很快就会来照耀着他。这不禁令我深思',
-    '吉格·金克拉曾经说过，如果你能做梦，你就能实现它。这不禁令我深思',
-]
-
-let 后面垫话 = [
-    '这不禁令我深思。 ',
-    '带着这句话，我们还要更加慎重的审视这个问题： ',
-    '这启发了我， ',
-    '我希望诸位也能好好地体会这句话。 ',
-    '这句话语虽然很短，但令我浮想联翩。 ',
-    '这似乎解答了我的疑惑。 ',
-]
-
-let 前面垫话 = [
-    '曾经说过',
-    '在不经意间这样说过',
-    '曾经提到过',
-    '说过一句富有哲理的话'
-]
-
-let 初始主题 = [
-    '一天掉多少根头发',
-    '中午吃什么',
-    '学生会退会',
-    '好好学习',
-    '生活的意义',
-    '科学和人文谁更有意义'
-]
-
-let 下取整 = Math.floor;
-
-let 同余乘数 = 214013;
-let 同余加数 = 2531011;
-let 同余模 = Math.pow(2,32);
-
-let 随机种子 = 获取网址参数('随机种子') || 下取整( 随便取一个数(0, 同余模, Math.random) );
-
-let 主题 = 获取网址参数('主题') || 随便取一句(初始主题)
-
-$('input').value = 主题;
-
-// LCG https://en.wikipedia.org/wiki/Linear_congruential_generator
-function 同余发生器() {
-    随机种子 = ( 随机种子 * 同余乘数 + 同余加数 ) % 同余模;
-    return 随机种子 / 同余模;
-};
-
-function 随便取一句(列表){
-    let 坐标 = 下取整( 同余发生器() * 列表.length );
-    return 列表[坐标];
-}
-
-function 随便取一个数(最小值 = 0,最大值 = 100,随机数函数 = 同余发生器){
-    let 数字 = 随机数函数() * ( 最大值 - 最小值 ) + 最小值;
+//基本
+//输入
+let 主题 = "Red"
+let	同义词 = "Blue"
+let	近义词 = "Orange"
+let	上级 = "colour"
+let 方法 = "measuring"
+let	特征 = "wave length"
+//let 
+//写入
+序列 = 0;
+局部序列 = 0;
+局部序列1 = 0;
+let 选中作者 = 作者[序列];
+let 选中时间 = 时间[序列];
+//函数
+function 选数字(最小值 = 0,最大值 = 100){
+    let 数字 = Math.random()*( 最大值 - 最小值 ) + 最小值;
     return 数字;
 }
+function 选句子(列表){
+    let 坐标 = Math.floor( Math.random() * 列表.length );
+    return 列表[坐标];
+	列表.splice(坐标, 1, );
+}
+function 写句子(列表){
+	var 选的句子 = 选句子(句子名称[局部序列]);
+    var 写的句子 = 一套替换(选的句子);
+    return 写的句子;
+	}
+String.prototype.替换=function(被替换,新替换){
+    var reg=new RegExp(被替换,"g");
+    return this.replace(reg,新替换);
+}
+function 一套替换(选的句子){
+	let 主题1 = "<font color=\"red\">"+主题+"</font>";
+	let 同义词1 = "<font color=\"blue\">"+同义词+"</font>";
+	let 近义词1 = "<font color=\"orange\">"+近义词+"</font>";
+	let 上级1 = "<font color=\"purple\">"+上级+"</font>";
+	let 特征1 = "<i>"+特征+"</i>";
+	let 方法1 = "<u>"+方法+"</u>";
+	选的句子 = 选的句子.替换("主题",主题1);
+    选的句子 = 选的句子.替换("同义词",同义词1);
+    选的句子 = 选的句子.替换("近义词",近义词1);
+    选的句子 = 选的句子.替换("上级",上级1);
+	选的句子 = 选的句子.替换("方法",方法1);
+	选的句子 = 选的句子.替换("特征",特征1);
+	选的句子 = 选的句子.替换("…" ,"写个宾语或从句");
+		//局部序列1 = 局部序列1 + 1;
+	if (选的句子.match("作者")){
+		let 选中作者 = "<b>"+作者[序列]+"</b>";
+		let 选中时间 = "<b>"+时间[序列]+"</b>";
+		选的句子 = 选的句子.替换("作者",选中作者);
+		选的句子 = 选的句子.替换("时间",选中时间);
+		序列 = 序列 + 1;
+		return 选的句子;
+		}
+	else if (选的句子.match("时间")){
+		let 选中作者 = "<b>"+作者[序列]+"</b>";
+		let 选中时间 = "<b>"+时间[序列]+"</b>";
+		选的句子 = 选的句子.替换("作者",选中作者);
+		选的句子 = 选的句子.替换("时间",选中时间);
+		序列 = 序列 + 1;
+		return 选的句子;
+		}
+	else return 选的句子;
+	}
 
-function 来点名人名言(){
-    let 名言 = 随便取一句(名人名言)
-    名言 = 名言.replace('曾经说过', 随便取一句(前面垫话) )
-    名言 = 名言.replace('这不禁令我深思', 随便取一句(后面垫话) )
-    return 名言
+function 写前方法1(){
+	var 前人方法 = 选句子(前方法1);
+    var 前人方法 = 一套替换(前人方法);
+	return 前人方法;
+}
+function 写方法缺(){
+	var 方法缺陷 = 选句子(方法缺);
+    var 方法缺陷 = 一套替换(方法缺陷);
+	return 方法缺陷;
+}
+function 写方法意(){
+	var 方法目的 = 选句子(方法意);
+    var 方法目的 = 一套替换(方法目的);
+	return 方法目的;
+}
+function 写源方法(){
+	var 方法来源 = 选句子(源方法);
+    var 方法来源 = 一套替换(方法来源);
+	return 方法来源;
+}
+function 写近方法(){
+	var 目前方法 = 选句子(近方法);
+    var 目前方法 = 一套替换(目前方法);
+	return 目前方法;
+}
+function 写总步骤(){
+	var 步骤总领 = 选句子(总步骤);
+    var 步骤总领 = 一套替换(步骤总领);
+	return 步骤总领;
+}
+function 写步骤前(){
+	var 步骤起始 = 选句子(步骤前);
+    var 步骤起始 = 一套替换(步骤起始);
+	return 步骤起始;
+}
+function 写被步骤(){
+	var 被动语态 = 选句子(被步骤);
+    var 被动语态 = 一套替换(被动语态);
+	return 被动语态;
+}
+function 写步骤度(){
+	var 特征提取 = 选句子(步骤度);
+    var 特征提取 = 一套替换(特征提取);
+	return 特征提取;
+}
+function 写样本基(){
+	var 取样基准 = 选句子(样本基);
+    var 取样基准 = 一套替换(取样基准);
+	return 取样基准;
+}
+function 写样本征(){
+	var 样本特征 = 选句子(样本征);
+    var 样本特征 = 一套替换(样本特征);
+	return 样本特征;
+}
+function 写分析器(){
+	var 分析装置 = 选句子(分析器);
+    var 分析装置 = 一套替换(分析装置);
+	return 分析装置;
 }
 
-function 来点论述(){
-    let 句子 = 随便取一句(论述);
-    句子 = 句子.replace(RegExp('主题', 'g'),主题);
-    return 句子;
+function 生成方法(){
+    主题 = $("input[id='主题']").value
+	同义词 = $("input[id='同义词']").value
+	近义词 = $("input[id='近义词']").value
+	上级 = $("input[id='上级']").value
+	方法 = $("input[id='方法']").value
+	特征 = $("input[id='特征']").value
+	var 章节 = "<p>Method</p>";
+		if ( 1 == 1 ){
+			var 句子 = 写前方法1();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写方法缺();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写方法意();
+				章节 = 章节 + 句子 +" ";
+			var 句子 = 写源方法();
+				章节 = 章节 + 句子 +" ";
+			var 句子 = 写方法缺();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写近方法();
+				章节 = 章节 + 句子 +" ";
+			var 句子 = 写总步骤();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写步骤前();
+				章节 = 章节 + 句子 +" ";
+			var 句子 = 写被步骤();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写步骤度();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写样本基();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写样本征();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写分析器();
+				章节 = 章节 + 句子 +" ";
+			序列 = 0
+			局部序列1 = 0;
+            }
+    
+	document.getElementById("方法部分").innerHTML = 章节;
 }
 
-function 增加段落(段落){
-    if(段落[段落.length-1] === ' '){
-        段落 = 段落.slice(0,-2)
-    }
-    return '　　' + 段落 + '。 '
+function 写泛相关(){
+	var 不太借鉴 = 选句子(泛相关);
+    var 不太借鉴 = 一套替换(不太借鉴);
+	return 不太借鉴;
+}
+function 写远相关(){
+	var 有点借鉴 = 选句子(远相关);
+    var 有点借鉴 = 一套替换(有点借鉴);
+    return 有点借鉴;
+}
+function 写域相关(){
+    var 领域借鉴 = 选句子(域相关);
+    var 领域借鉴 = 一套替换(领域借鉴);
+    return 领域借鉴;
+	
+}
+function 写近相关(){
+    var 历史借鉴 = 选句子(近相关);
+    var 历史借鉴 = 一套替换(历史借鉴);
+    return 历史借鉴;
+}
+function 写现相关(){
+    var 目前借鉴 = 选句子(现相关);
+    var 目前借鉴 = 一套替换(目前借鉴);
+    return 目前借鉴;
+}
+//
+function 写前方法(){
+    var 方法借鉴 = 选句子(前方法);
+    var 方法借鉴 = 一套替换(方法借鉴);
+    return 方法借鉴;
+}
+function 写前人员(){
+    var 思想借鉴 = 选句子(前人员);
+    var 思想借鉴 = 一套替换(思想借鉴);
+    return 思想借鉴;
+}
+function 写前时间(){
+    var 里程借鉴 = 选句子(前时间);
+    var 里程借鉴 = 一套替换(里程借鉴);
+    return 里程借鉴;
+}
+function 写前研究(){
+    var 结论借鉴 = 选句子(前研究);
+    var 结论借鉴 = 一套替换(结论借鉴);
+    return 结论借鉴;
+}
+function 写前话题(){
+    var 吹牛借鉴 = 选句子(前话题);
+    var 吹牛借鉴 = 一套替换(吹牛借鉴);
+    return 吹牛借鉴;
+}
+//
+function 写前关系(){
+    var 关系借鉴 = 选句子(前关系);
+    var 关系借鉴 = 一套替换(关系借鉴);
+    return 关系借鉴;
+}
+function 写前总结(){
+    var 总结借鉴 = 选句子(前总结);
+    var 总结借鉴 = 一套替换(总结借鉴);
+    return 总结借鉴;
 }
 
-function 生成文章(){
-    主题 = $('input').value
-    history.pushState({url: window.location.href}, null ,'?主题=' + 主题 + '&随机种子=' + 随机种子);
-    track('generator', 主题, 随机种子);
-    let 文章 = []
-    let 段落 = '';
-    let 文章长度 = 0;
-    while( 文章长度 < 12000 ){
-        let 随机数 = 随便取一个数();
-        if(随机数 < 5 && 段落.length > 200){
-            段落 = 增加段落(段落);
-            文章.push(段落);
-            段落 = '';
-        }else if(随机数 < 20){
-            let 句子 = 来点名人名言();
-            文章长度 = 文章长度 + 句子.length;
-            段落 = 段落 + 句子;
-        }else{
-            let 句子 = 来点论述();
-            文章长度 = 文章长度 + 句子.length;
-            段落 = 段落 + 句子;
-        }
-    }
-    段落 = 增加段落(段落);
-    文章.push(段落);
-
-    let 排版 = '<div>' + 文章.join('</div><div>') + '</div>';
-    $('#文章').innerHTML = 排版;
-    $('#声明文字').style.display = 'block'
+function 生成证言(){
+    主题 = $("input[id='主题']").value
+	同义词 = $("input[id='同义词']").value
+	近义词 = $("input[id='近义词']").value
+	上级 = $("input[id='上级']").value
+	//alert (序列);
+	var 章节 = "<p>Intro</p>";
+		if ( 2 == 2 ){
+			var 句子 = 写泛相关();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写远相关();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写域相关();
+				章节 = 章节 + 句子 +" ";
+			var 句子 = 写近相关();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写现相关();
+				章节 = 章节 + 句子 +" ";
+			var 句子 = 写前方法();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写前人员();
+				章节 = 章节 + 句子 +" ";
+			var 句子 = 写前时间();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写前研究();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写前话题();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写前关系();
+				章节 = 章节 + 句子 +" ";
+            var 句子 = 写前总结();
+				章节 = 章节 + 句子 +" ";
+			序列 = 0;
+			局部序列1 = 0;
+            }
+    
+	document.getElementById("证言部分").innerHTML = 章节;
 }
-
-if (获取网址参数('主题')) {
-    生成文章();
-    track('shared', 主题, 随机种子);
-}
-
+function 讨厌的弹出(){
+	alert("声明：\n本作品使用反996许可证发布，仅供测试使用，\n请勿将生成的文章用于正规用途\n\n免责声明:\n在使用本作品前，请您务必仔细阅读并透彻理解本声明。您可以选择不使用本作品，但如果您使用本作品，您的使用行为将被视为对本声明全部内容的认可。\n本作品产生的文章由用户输入内容结合随机信息生成，版权人不保障生成文章的安全性、正确性、及时性、合法性，用户在使用过程中的风险由用户自行承担，版权人对用户使用本作品产生的内容其概不负责，亦不承担任何法律责任。\n任何本作品生成的链接地址均系第三方或用户生成，版权人对链接本身及由链接产生的内容概不负责，亦不承担任何法律责任。\n本作品产生的文章均由浏览器产生，无服务器端服务且无存储，版权人不对由用户产生的侵权行为负责，亦不承担任何法律责任。\n本作品不对用户使用过程中使用的任何第三方产品负责，亦不承担任何法律责任。\n本作品不对任何本作品使用的第三方服务负责，亦不承担任何法律责任。\n本作品不对任何基于本作品的衍生品负责，亦不承担任何法律责任。"); 
+	alert(
+	"许可证:\n\n非内容部分版权所有（c）2019-2020 meng ke, suulnnka, qtgt\n\n反996许可证版本1.0\n\n在符合下列条件的情况下，特此免费向任何得到本授权作品的副本（包括源代码、文件和/或相关内容，以下统称为“授权作品”）的个人和法人实体授权：被授权个人或法人实体有权以任何目的处置授权作品，包括但不限于使用、复制，修改，衍生利用、散布，发布和再许可：\n1. 个人或法人实体必须在许可作品的每个再散布或衍生副本上包含以上版权声明和本许可证，不得自行修改。\n2. 个人或法人实体必须严格遵守与个人实际所在地或个人出生地或归化地、或法人实体注册地或经营地（以较严格者为准）的司法管辖区所有适用的与劳动和就业相关法律、法规、规则和标准。如果该司法管辖区没有此类法律、法规、规章和标准或其法律、法规、规章和标准不可执行，则个人或法人实体必须遵守国际劳工标准的核心公约。\n3. 个人或法人不得以任何方式诱导、暗示或强迫其全职或兼职员工或其独立承包人以口头或书面形式同意直接或间接限制、削弱或放弃其所拥有的，受相关与劳动和就业有关的法律、法规、规则和标准保护的权利或补救措施，无论该等书面或口头协议是否被该司法管辖区的法律所承认，该等个人或法人实体也不得以任何方法限制其雇员或独立承包人向版权持有人或监督许可证合规情况的有关当局报告或投诉上述违反许可证的行为的权利。\n\n该授权作品是\"按原样\"提供，不做任何明示或暗示的保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，无论是在合同诉讼、侵权诉讼或其他诉讼中，版权持有人均不承担因本软件或本软件的使用或其他交易而产生、引起或与之相关的任何索赔、损害或其他责任。");}
 </script>
 <style>
   @media screen and (max-width: 1024px) {
@@ -314,28 +692,13 @@ if (获取网址参数('主题')) {
     body{
       margin: 0;
     }
-    #主体{
+    #输入{
       border: 2px solid #333333;
-      margin: 6px;
+      margin: 20px;
       padding: 6px;
       background: #f8f8f8;
     }
-    #标题{
-      font-size: 3rem;
-      line-height: 3rem;
-      text-align: center;
-    }
-    #主题{
-      text-align: center;
-      margin-top: 6px;
-      font-size: 0px;
-    }
-    #主题 span{
-      font-size: 2rem;
-      vertical-align: baseline;
-      margin-left: 6px;
-    }
-    #主题 input{
+	#输入 input{
       border: none;
       border-bottom: #666666 2px solid;
       padding: 1px 0 0 0;
@@ -347,136 +710,75 @@ if (获取网址参数('主题')) {
       text-align: center;
       min-width: 20%;
     }
-    #主题 button{
+	#输入 div{
+      font-size: 2rem;
+      vertical-align: baseline;
+      margin-left: 6px;}
+    #输入 button{
       border: 0;
       padding: 3px 7px 3px 7px;
       margin: 0;
       vertical-align: top;
-      font-size: 1.4rem;
-      background: #454545;
-      color: #efefef;
-    }
-    #文章 div{
-      margin-top: 6px;
       font-size: 2rem;
-      text-align: justify;
+      background: #454545;
+      color: #efefef;}
+	#输出{
+      border: 2px solid #333333;
+      margin: 20px;
+      padding: 20px;
+      background: #f8f8f8;}
+	#输出 div{
+      font-size: 1rem;
+      vertical-align: baseline;
+      margin-left: 6px;}
+    
     }
-    #声明{
-      float: left;
-      margin: 0 0 0 6px;
-    }
-    #声明 p{
-      margin: 0 0 3px 3px;
-      font-size: 1.4rem;
-    }
-    #声明文字{
-      display: none;
-    }
-    #页脚{
-      margin: 6px;
-    }
-    #页脚 p{
-      margin: 3px;
-      font-size: 1.4rem;
-      text-align: right;
-    }
-    .链接{
-      color: #666666;
-    }
-    .图标{
-      height: 1rem;
-      width: 1rem;
-      vertical-align: top;
-      margin-top: 2px;
-    }
-  }
-
+    
   @media screen and (min-width: 1024px) {
     html{
-      font-size: 1.3vw;
+      font-size: 1vw;
       color: #333333;
     }
     body{
       margin: 0;
     }
-    #主体{
+    #输入{
       border: 2px solid #333333;
       margin: 20px;
       padding: 20px;
       background: #f8f8f8;
     }
-    #标题{
-      font-size: 1.9rem;
-      line-height: 1.9rem;
-      text-align: center;
-    }
-    #主题{
-      text-align: center;
-      margin-top: 20px;
-      font-size: 0px;
-    }
-    #主题 span{
-      font-size: 1rem;
-      vertical-align: baseline;
-      margin-left: 20px;
-    }
-    #主题 input{
-      border: none;
-      border-bottom: #666666 2px solid;
-      padding: 1px 0 0 0;
-      margin: 0px 20px 0 20px;
-      vertical-align: baseline;
-      font-size: 1rem;
-      background: #f8f8f8;
-      color: #333333;
-      text-align: center;
-      min-width: 20%;
-    }
-    #主题 button{
-      border: 0;
-      padding: 5px 15px 5px 15px;
-      margin: 0;
-      vertical-align: top;
-      font-size: 0.75rem;
-      background: #454545;
-      color: #efefef;
-    }
-    #文章 div{
-      margin-top: 20px;
-      text-align: justify;
-    }
-    #声明{
-      float: left;
-      margin: 0 0 0 20px;
-    }
-    #声明 p{
-      margin: 0 0 5px 5px;
-      font-size: 0.75rem;
-    }
-    #声明文字{
-      display: none;
-    }
-    #页脚{
+	#输出{
+      border: 2px solid #333333;
       margin: 20px;
+      padding: 20px;
+      background: #f8f8f8;
     }
-    #页脚 p{
-      margin: 5px;
-      font-size: 0.75rem;
-      text-align: right;
-    }
-    .链接{
-      color: #666666;
-    }
-    #页脚 span{
-      padding: 2px 0 0 0;
-      vertical-align: baseline;
-    }
-    .图标{
-      height: 0.7rem;
-      width: 0.7rem;
-      vertical-align: top;
-      margin-top: 4px;
-    }
+    
   }
-
+ 
 </style>
+<body>
+<p></p>
+<p></p>
+<div id = "输入">
+<p></p>
+<div><center><b>娱乐报告生成器 2019</b></center></div>
+<div><center><b>QtGt's Scigen for Horseplay Ver. 2019</b></center></div>
+<div style="color:red"><p>主题：<input type="text" value=Red name="主题" id="主题" class =输入></p></div>
+<div style="color:blue"><p>同义词：<input type="text" value=Blue name="同义词" id="同义词"  class =输入></p></div>
+<div style="color:orange"><p>近义词：<input type="text" value="Orange" name="近义词" id="近义词" class =输入></p></div>
+<div style="color:purple"><p>上级：<input type="text" value=colour name="上级" id="上级" class =输入></p></div>
+<div ><p><i>方法：</i><input type="text" value=measuring name="方法" id="方法" class =输入></p></div>
+<div ><p><u>特征：</u><input type="text" value="wave length" name="特征" id="特征" class =输入></p></div>
+<div><p><button onclick="生成证言();生成方法();讨厌的弹出()">生成娱乐版报告</button></p></div>
+</div>
+<div id = "输出">
+<div id="证言部分"><p>原版（Javascript 和 生成部分）<del> 照抄 </del>参考：<a href="https://github.com/menzi11/BullshitGenerator" target="_blank">@menzi11</a></p><p>网页版（样式和声明）<del> 照抄 </del>参考：<a href="https://github.com/suulnnka/BullshitGenerator" target="_blank">@suulnnka</a></p><p>主要参考文献：<a href="https://www.amazon.co.uk/The-Academic-Phrasebank-academic-resource-students-researchers-ebook/dp/B019INQ45Y" target="_blank">Morley, J. (2017). The academic phrasebank: An academic writing resource for students and researchers</a>.</p></div>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<div id="方法部分"><p>关于本版：首先，分写的wave length，是为了说明支持空格；再就是，由于本人并不真懂 CSS 和 Javascript，所以没有售后~~</p><p>© QtGt Studio (Not-Really-Existent-Yet) 2019-2020, all rights reserved. </p></div>
+</div>
+</body>
