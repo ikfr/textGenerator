@@ -1,6 +1,8 @@
 # 娱乐报告生成器
 # SCI Generator for Houseplay
 
+现地址 https://qtgt.github.io/SciGen
+
 原项目地址 https://github.com/menzi11/BullshitGenerator
 
 原网页版地址 https://suulnnka.github.io/BullshitGenerator/index.html
