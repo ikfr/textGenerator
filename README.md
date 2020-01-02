@@ -1,5 +1,5 @@
 # 娱乐报告生成器
-# SCI Generator for Houseplay
+# SCI Generator for Horseplay
 
 现地址 https://qtgt.github.io/SciGen
 
