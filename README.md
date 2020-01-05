@@ -1,5 +1,5 @@
 # 科学报告语料生成器（原：娱乐报告生成器）
-# QtGt's SCI Generator for Houseplay
+# QtGt's SCI Generator for Horseplay
 
 现地址 https://qtgt.github.io/SciGen
 
@@ -17,11 +17,11 @@
 4. 取消弹出窗口
 5. 修改标题和部分样式
 6. 其他已知 bug 的修改
-7. 增加了其他bug 
+7. 增加了其他 bug 
 
 修改 #20191231:  
 1. 增加了输入的变量  
-2. 增加了其他bug  
+2. 增加了其他 bug  
 3. 更加中文化编程  
 
 未来可以做的点:  
