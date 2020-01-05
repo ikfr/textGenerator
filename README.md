@@ -1,7 +1,7 @@
 # 科学报告语料生成器（原：娱乐报告生成器）
 # QtGt's SCI Generator for Horseplay
 
-现地址 https://qtgt.github.io/SciGen
+现网页版地址 https://qtgt.github.io/SciGen
 
 原项目地址 https://github.com/menzi11/BullshitGenerator
 
