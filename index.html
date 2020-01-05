@@ -1,14 +1,199 @@
 <!DOCTYPE html>
 <head>
-<title>娱乐报告生成器 2019</title>
+<meta charset="utf-8">
+<title>报告语料生成器 2020</title>
 
-<meta http-equiv="content-type" content="txt/html; charset=utf-8"></head>
+</head>
 <script>
 window.$ = function (selector) {
   return document.querySelector(selector);
 }
 //句子库
-//证言务虚
+//修饰
+let 分段 = ["</p>",]
+//结果的部分
+let 结目的 = [
+"The first set of questions aimed to …",
+"To compare the difference between …",
+"The purpose of Experiment was to …",
+"Simple statistical analysis was used to …",
+"The next question asked the informants …",
+"To assess 主题, the 同义词 research was used.",
+"Changes in 主题 and 同义词 were compared using …",
+"Regression analysis was used to predict the …",
+"To distinguish between these two possibilities, …",
+"The first set of analyses examined the impact of …",
+"The correlation between 主题 and 同义词 was tested using …",
+"T-tests were used to analyse the relationship between …",
+"The average scores of 主题 and 同义词 were compared in order to …",
+"In order to assess 近义词, repeated-measures ANOVAs were used.",
+"Nine items on the research measured the extent to which …",
+]
+let 结数据 = [
+"What stands out in the table is …",
+"Closer inspection of the table shows …",
+"It is apparent from this table that very few …",
+"The most interesting aspect of this graph is …",
+"In Fig.1 there is a clear trend of decreasing …",
+"What is striking about the figures in this table is …",
+"What is interesting about the data in this table is that …",
+"The differences between 主题 and 同义词 are highlighted in Table 4.",
+"From the chart, it can be seen that by far the greatest demand is for …",
+"From this data, we can see that Study 2 resulted in the lowest value of …",
+"This table is quite revealing in several ways. First, unlike the other tables …",
+"From the data in Figure 9, it is apparent that the length of time left between …",
+"Data from this table can be compared with the data in Table 4.6 which shows …",
+"As Table III shows, there is a significant difference (t = -2.15, p = 0.03) between the two groups.",
+]
+let 正数据 = [
+"The mean score for 主题 was …",
+"Further analysis showed that …",
+"Further statistical tests revealed …",
+"A two-way ANOVA revealed that …",
+"On average, 主题s were shown to have …",
+"Strong evidence of 主题 was found when …",
+"This result is significant at the p = 0.05 level.",
+"The results, as shown in Table 1, indicate that …",
+"A positive correlation was found between 主题 and 同义词.",
+"There was a significant positive correlation between …",
+"The difference between the 主题 and 同义词 groups was significant.",
+"There was a significant difference in 主题, t(11) = 2.906, p<0.01",
+"There was a significant difference between the two conditions …",
+"Respondents who reported low levels of 主题 also reported significantly lower levels of 同义词.",
+]
+let 负数据 = [
+"No increase in 主题 was detected.",
+"No difference greater than 主题 was observed.",
+"No significant differences were found between …",
+"None of these differences were statistically significant.",
+"No significant difference between the two groups was evident.",
+"No significant reduction in 主题 was found compared with placebo.",
+"No evidence was found for non-linear associations between 主题 and 同义词.",
+"No significant correlation was found between 主题 scores and the 同义词 scores (p = .274)",
+"主题 appeared to be unaffected by 同义词.",
+"Only trace amounts of 主题 were detected in …",
+"There was no evidence that 主题 has an influence on …",
+"The Chi-square test did not show any significant differences between …",
+"Overall, 主题 did not affect males and females differently in these measures.",
+"A clear benefit of 主题 in the prevention of 同义词 could not be identified in this analysis.",
+"T-tests found no significant differences in mean scores on the 主题 and 同义词 subscales.",
+]
+let 两数据 = [
+"Stimulation of 主题 cells with 同义词 did not increase the …",
+"With successive increases in intensity of the 主题, the 同义词 moved further to …",
+"Following the addition of 主题, a significant increase (P<0.05) in the 同义词 was recorded.",
+"When 主题 cells were stimulated with 同义词, no significant difference in the number of 近义词 was detected.",
+]
+let 亮数据 = [
+"Interestingly, the 主题 was observed to …",
+"This result is somewhat counterintuitive.",
+"Interestingly, this correlation is related to …",
+"The more surprising correlation is with the …",
+"Surprisingly, only a minority of respondents …",
+"The most surprising aspect of the data is in the …",
+"The correlation between 主题 and 同义词 is interesting because …",
+"The most striking result to emerge from the data is that …",
+"Interestingly, there were also differences in the ratios of …",
+"The single most striking observation to emerge from the data comparison was …",
+]
+let 效数据 = [
+"Although the some response to the research was poor.",
+"Thirty-two individuals returned the researchs.",
+"The response rate was 60% at six months and 56% at 12 months.",
+"Of the study population, 90 subjects completed and returned the research.",
+"Of 150 individuals who were sent invitations, 81 returned the reply slip, of whom 60 agreed to …",
+"By the end of the research period, data had been collected from 64 individuals, 23 of whom were …",
+"There were 53 responses to the question: ‘…?’",
+"Respondents were asked to indicate whether …",
+"The total number of responses for this question was …",
+"The overall response to this question was very positive.",
+"Respondents were asked to suggest other reasons for …",
+"In response to the question: ‘…?’, a range of responses was elicited.",
+"This section of the research required respondents to give information on …",
+]
+let 比数据 = [
+"Over half of those researched reported that …",
+"A minority of participants (17%) indicated that …",
+"70% of those who were interviewed indicated that ….",
+"Almost two-thirds of the participants (64%) said that ….",
+"The majority of those who responded to this item felt that …",
+"When asked whether …, 90% of the respondents reported that …",
+"Just over half of those who answered this question reported that …",
+"In response to Question 1, most of those researched indicated that …",
+"When the participants were asked ……, the majority commented that …",
+"Of the 148 patients who completed the research, just over half indicated that …",
+]
+let 场数据 = [
+"Another reported problem was …",
+"Opinions differed as to whether …",
+"Concerns were expressed about …",
+"A number of issues were identified …",
+"A variety of perspectives were expressed …",
+"These views surfaced mainly in relation to …",
+"Concerns regarding 主题 were more widespread.",
+"There was a sense of 主题 amongst results.",
+"Five broad themes emerged from the analysis.",
+"A common view amongst results was that …",
+"One concern expressed regarding 主题 was whether …",
+"This theme came up for example in discussions of …",
+"The themes of 主题 and 同义词 recurred throughout the dataset.",
+"Two divergent and often conflicting discourses emerged …",
+"Two discrete reasons emerged from this. First … Second …",
+"Issues related to 主题 were not particularly prominent in the interview data.",
+"A recurrent theme in the interviews was a sense amongst results that …",
+]
+let 另数据 = [
+"It was suggested that …",
+"One result argued that …",
+"There were some suggestions that …",
+"In all cases, the informants reported that …",
+"In their accounts of the events surrounding …",
+"There were some negative comments about …",
+"The participants on the whole demonstrated …",
+"Some felt that … , while others considered that …",
+"Some results argued that … , while others …",
+"This view was echoed by another informant who ..",
+"Whilst a minority mentioned that…, all agreed that…",
+"Only a small number of respondents indicated that …",
+"A small number of those interviewed suggested that ….",
+"For a small number of participants 主题 was the reason for …",
+"The majority of participants agreed with the statement that …",
+"When asked about 主题, the participants were unanimous in the view that …",
+]
+let 外数据 = [
+"As one result shows that ‘…’",
+"As one interviewee put it: ‘…’",
+"One informant reported that …",
+"The comment below illustrates …",
+"One participant commented: ‘ …’",
+"For example, one interviewee said: ‘…’",
+"In one case, the participant thought that …",
+"Another interviewee, when asked …, said: ‘…’",
+"Other responses to this question included: ‘…’",
+"Another interviewee alluded to the notion of …",
+"Talking about this issue an interviewee said: ‘…’",
+"Commenting on 主题, one of the interviewees said …",
+"One individual stated that ‘…’ And another commented ‘…’",
+]
+let 结过渡 = [
+"If we now turn to …",
+"A comparison of the two results reveals …",
+"Turning now to the experimental evidence on …",
+"Comparing the two results, it can be seen that …",
+"The next section of the research was concerned with …",
+"In the final part of the research, respondents were asked …",
+]
+let 结论点 = [
+"These results suggest that …",
+"Overall, these results indicate that …",
+"In summary, these results show that …",
+"In summary, for the informants in this study, …",
+"Together these results provide important insights into …",
+"Taken together, these results suggest that there is an association between …",
+"The results in this chapter indicate that … The next chapter, therefore, moves on to discuss the …",
+]
+
+//证言的部分
 let 泛相关 = [
 "The literature on 主题 has highlighted several …",
 "Different theories exist in the literature regarding …",
@@ -57,21 +242,21 @@ let 域相关 = [
 "Numerous studies have attempted to explain … (for example, 作者, 时间).",
 ]
 let 近相关 = [
-"Several lines of 上级 evidence suggest that …",
-"Previous 上级 research has established that …",
+"Several lines of evidence suggest that …",
+"Previous research has established that …",
 "Data from several studies suggest that …",
 "It is now well established from a variety of studies that …",
-"A number of 上级 studies have postulated a convergence between …",
+"A number of studies have postulated a convergence between …",
 "Surveys such as that conducted by 作者 (时间) have shown that …",
 "Many recent studies (e.g. 作者, 时间; 作者, 时间) have shown that …",
 "Traditionally, it has been argued that … (e.g. 作者, 时间).",
 "Severalresearchers of 上级 have been published. 作者 (时间) presents …",
 "In previous studies on 主题, different variables have been found to be related to …",
-"Many 上级 researchers have argued that … (e.g. 作者, 时间).",
+"Many historians have argued that … (e.g. 作者, 时间; Johnson, 时间; 作者, 时间).",
 "There is a consensus among social scientists that … (e.g. 作者, 时间",
 "Data from several sources have identified the increased 主题 and 同义词 associated with obesity.",
 "It has been demonstrated that a high intake of 主题 results in damage to … (作者, 时间; …).",
-"There is a large number of published studies of 上级 (e.g., 作者, 时间) that describe …",
+"There is a large number of published studies (e.g., 作者, 时间) that describe …",
 "Some cross-sectional studies suggest an association between 主题 and 同义词 (作者, 时间).",
 "It has been suggested that levels of 主题 are independent of the size of the 同义词 (作者 et al., 时间).",
 "It has conclusively been shown that 主题 and 同义词 increase 近义词 (作者 et al., 时间).",
@@ -87,8 +272,7 @@ let 现相关 = [
 "GM varieties of maize are able to cross-pollinate with non-GM varieties (作者, 时间) …",
 "A relationship exists between an individual’s working memory and their ability to … (作者, 时间).",
 ]
-//务实
-let 前方法 = [
+let 前做法 = [
 "Most research on 主题 has been carried out in …",
 "Most researchers investigating 主题 have utilised …",
 "Using this approach, researchers have been able to …",
@@ -174,7 +358,6 @@ let 前话题 = [
 "The 上级 relationship reaction between 主题 and 同义词 was first reported by 作者 in 时间.",
 "The way in which 主题 is regulated was studied extensively by 作者 and colleagues (作者 et al. 时间 and 时间).",
 ]
-//结构
 let 前关系 = [
 "In this chapter, 作者 provides us with a number of important …",
 "In the subsequent chapter, 作者 examines the extent to which …",
@@ -195,41 +378,8 @@ let 前总结 = [
 "A broader perspective has been adopted by 作者 (时间) who argues that …",
 "Conversely, 作者 (时间) reported no significant difference in mortality between 主题 and 同义词.",
 ]
-//内容
-let 作者 = [
-"Zhao",
-"Qian",
-"Sun",
-"Li",
-"Zhou",
-"Wu",
-"Zheng",
-"Wang",
-"Feng",
-"Chen",
-"Chu",
-"Wei",
-"Jiang",
-"Shen",
-"Han",
-"Yang",
-]
-let 时间 = [
-"2001",
-"2002",
-"2003",
-"2004",
-"2005",
-"2006",
-"2007",
-"2008",
-"2009",
-"2010",
-"2011",
-"2012",
-]
-//方法务虚
-let 前方法1 = [
+//方法的部分
+let 前方法 = [
 "Many researchers have utilised 方法 to measure …",
 "One of the most well-known tools for assessing …",
 "Traditionally, 方法 has been assessed by measuring …",
@@ -259,7 +409,7 @@ let 近方法 = [
 "This method is particularly useful in studying …",
 "A quantitative approach was employed since …",
 "Qualitative methods offer an effective way of …",
-"The design of the questionnaires was based on …",
+"The design of the researchs was based on …",
 "The 方法 method is one of the more practical ways of …",
 "The semi-structured approach was chosen because …",
 "The 方法 approach has a number of attractive features: …",
@@ -351,7 +501,7 @@ let 被步骤 = [
 "Data were collected using semi-structured interviews in …",
 "Participants were thanked for their time and effort and for …",
 "The experiments were run using custom software written in …",
-"Two sets of anonymised questionnaires were completed by …",
+"Two sets of anonymised researchs were completed by …",
 "A total of 256 samples were taken from 52 boreholes (Figure 11).",
 "The solution was washed three times with deionized water and …",
 "Significance levels were set at the 1% level using the student t-test.",
@@ -404,34 +554,608 @@ let 方法缺 = [
 "It was not possible to investigate the significant relationships of 主题 and 同义词 further because …",
 "The responses relating to 主题 were subjective and were therefore susceptible to recall bias.",
 ]
+//讨论的部分
+let 重总证 = [
+"Several reports have shown that …",
+"As mentioned in the literature review, …",
+"Prior studies that have noted the importance of …",
+"Very little was found in the literature on the question of …",
+"Previous studies evaluating 主题 observed inconsistent results on whether …",
+"A strong relationship between 主题 and 同义词 has been reported in the literature.",
+"In reviewing the literature, no data was found on the association between 主题 and 同义词.",
+]
+let 重目的 = [
+"The third question in this research was …",
+"An initial objective of the project was to identify …",
+"The first question in this study sought to determine …",
+"It was hypothesised that participants with a history of …",
+"The present study was designed to determine the effect of …",
+"With respect to the first research question, it was found that …",
+"This study set out with the aim of assessing the importance of 主题 in …",
+]
+let 重结果 = [
+"One interesting finding is …",
+"The current study found that …",
+"Another important finding was that …",
+"The most interesting finding was that …",
+"In this study, 主题s were found to cause …",
+"The results of this study show/indicate that …",
+"On the question of 主题, this study found that …",
+"This experiment did not detect any evidence for …",
+"The most important clinically relevant finding was …",
+"主题 provided the largest set of significant clusters of …",
+"It is interesting to note that in all seven cases of this study …",
+"The most obvious finding to emerge from the analysis is that …",
+"In the current study, comparing 主题 with 同义词 showed that the mean degree of …",
+"The results of this study did not show that …/did not show any significant increase in …",
+]
+let 外结果 = [
+"Surprisingly, 主题 was found to ….",
+"What is surprising is that ….",
+"One unanticipated finding was that ….",
+"Surprisingly, no differences were found in ….",
+"This finding was unexpected and suggests that ….",
+"It is somewhat surprising that no 主题 was noted in this condition ….",
+"Contrary to expectations, this study did not find a significant difference between ….",
+"However, the observed difference between 主题 and 同义词 in this study was not significant.",
+"However, the ANOVA (one way) showed that these results were not statistically significant.",
+]
+let 重分证 = [
+"This study confirms that 主题 is associated with …",
+"This finding was also reported by 作者 et al. (时间).",
+"This finding is consistent with that of 作者 (时间) who …",
+"Comparison of the findings with those of other studies confirms …",
+"This also accords with our earlier observations, which showed that …",
+"These results reflect those of 作者 et al. (时间) who also found that …",
+"Increased activation in the 主题 in this study corroborates these earlier findings.",
+"These results corroborate the findings of a great deal of the previous work in …",
+"This finding broadly supports the work of other studies in this area linking 主题 with 同义词.",
+"In accordance with the present results, previous studies have demonstrated that …",
+"It is encouraging to compare this figure with that found by 作者 (时间) who found that …",
+"Consistent with the literature, this research found that participants who reported using 主题 also …",
+"This study supports evidence from previous observations (e.g. 作者 et al., 时间).",
+"There are similarities between the attitudes expressed by 主题 in this study and those described by …",
+]
+let 重反证 = [
+"This study has been unable to demonstrate that …",
+"However, this result has not previously been described.",
+"This outcome is contrary to that of 作者 et al. (时间) who found …",
+"This finding is contrary to previous studies which have suggested that …",
+"In contrast to earlier findings, however, no evidence of 主题 was detected.",
+"The yields in this investigation were higher compared to those of other studies.",
+"However, the findings of the current study do not support the previous research.",
+"作者 et al. (时间) showed that … This differs from the findings presented here …",
+"The overall level was found to be 15%, lower than that of previously reported levels.",
+"It has been suggested that … (作者 et al., 时间). This does not appear to be the case.",
+"The levels observed in this investigation are far below those observed by 作者 et al. (时间).",
+"These results differ from 主题’s 时间 estimate of 同义词, but they are broadly consistent with earlier …",
+]
+let 解释 = [
+"A possible explanation for this might be that …",
+"Another possible explanation for this is that …",
+"This result may be explained by the fact that …",
+"There are, however, other possible explanations.",
+"These relationships may partly be explained by …",
+"There are several possible explanations for this result.",
+"A possible explanation for these results may be the lack of adequate …",
+"These differences can be explained in part by the proximity of 主题 and 同义词.",
+"These factors may explain the relatively good correlation between 主题 and 同义词.",
+"This inconsistency may be due to …",
+"These results are likely to be related to …",
+"This discrepancy could be attributed to …",
+"It seems possible that these results are due to …",
+"This rather contradictory result may be due to …",
+"The observed increase in 主题 could be attributed to …",
+"It is difficult to explain this result, but it might be related to …",
+"The possible interference of 主题 cannot be ruled out.",
+"It may be that these participants benefitted from …",
+"Differences between 主题 and 同义词 may have influenced …",
+"These possible sources of error could have affected …",
+"There are two likely causes for the differences between …",
+"The reason for this is not clear but it may have something to do with …",
+"The observed correlation between 主题 and 同义词 might be explained in this way: …",
+"Since this difference has not been found elsewhere it is probably not due to …",
+]
+let 谨慎 = [
+"Another source of uncertainty is …",
+"A note of caution is due here since …",
+"These findings may be somewhat limited by …",
+"These findings cannot be extrapolated to all patients.",
+"These data must be interpreted with caution because …",
+"It could be argued that the positive results were due to …",
+"These results therefore need to be interpreted with caution.",
+"In observational studies, there is a potential for bias from …",
+"It is important to bear in mind the possible bias in these responses.",
+"Although exclusion of 主题 did not …, these results should be interpreted with caution.",
+"However, with a small sample size, caution must be applied, as the findings might not be …",
+]
+let 假设 = [
+"It is possible, therefore, that …",
+"It can thus be suggested that …",
+"In general, therefore, it seems that …",
+"It may be the case therefore that these variations …",
+"It is therefore likely that such connections exist between …",
+"It is possible to hypothesise that these conditions are less likely to occur in …",
+"These findings suggest that …",
+"According to these data, we can infer that …",
+"This observation may support the hypothesis that …",
+"Hence, it could conceivably be hypothesised that …",
+"The value of 主题 suggests that a weak link may exist between …",
+"These results provide further support for the hypothesis that …",
+"Therefore, 主题 could be a major factor, if not the only one, causing …",
+"Noting implications of the findings",
+"It can therefore be assumed that the …",
+"An implication of this is the possibility that …",
+"The present study raises the possibility that …",
+"One of the issues that emerges from these findings is …",
+"Some of the issues emerging from this finding relate specifically to …",
+"These findings may help us to understand …",
+"This finding, while preliminary, suggests that .…",
+"This finding has important implications for developing …",
+"This observational study suggests that a diet rich in 主题 may help prevent …",
+"These findings raise intriguing questions regarding the nature and extent of …",
+"This combination of findings provides some support for the conceptual premise that …",
+]
+let 评论 = [
+"These findings are rather disappointing.",
+"However, these results were not very encouraging.",
+"The test was successful as it was able to identify students who …",
+"The present results are significant in at least two major respects.",
+"The results of this study do not explain the occurrence of these adverse events.",
+"These findings will doubtless be much scrutinised, but there are some immediately dependable conclusions for …",
+]
+let 重建议 = [
+"This is an important issue for future research.",
+"Research questions that could be asked include …",
+"There are still many unanswered questions about …",
+"Several questions remain unanswered at present.",
+"Despite these promising results, questions remain.",
+"Further work is required to establish the viability of…",
+"Further research should be undertaken to investigate the …",
+"There is abundant room for further progress in determining …",
+"A further study with more focus on 主题 is therefore suggested.",
+"Future studies on the current topic are therefore recommended.",
+"To develop a full picture of 主题, additional studies will be needed that …",
+"In future investigations, it might be possible to use a different 主题 in which …",
+"Further studies, which take these variables into account, will need to be undertaken.",
+]
+//结论的部分
+let 总声明 = [
+"This study set out to …",
+"This paper has argued that …",
+"This essay has discussed the reasons for …",
+"In this investigation, the aim was to assess …",
+"The aim of the present research was to examine …",
+"The purpose of the current study was to determine …",
+"The main goal of the current study was to determine …",
+"This project was undertaken to design … and evaluate …",
+"The present study was designed to determine the effect of …",
+"The second aim of this study was to investigate the effects of …",
+]
+let 总发现 = [
+"This study has identified …",
+"This study has shown that …",
+"The research has also shown that …",
+"The second major finding was that …",
+"These experiments confirmed that …",
+"主题 made no significant difference to …",
+"This study has found that generally …",
+"The investigation of 主题 has shown that …",
+"The results of this investigation show that …",
+"主题, 同义词 and 近义词 emerged as reliable predictors of …",
+"Multiple regression analysis revealed that the …",
+"The most obvious finding to emerge from this study is that …",
+"The relevance of 主题 is clearly supported by the current findings.",
+"One of the more significant findings to emerge from this study is that …",
+]
+let 域发现 = [
+"In general, therefore, it seems that …",
+"The results of this study indicate that …",
+"These findings suggest that in general …",
+"The findings of this study suggest that …",
+"Taken together, these results suggest that …",
+"An implication of this is the possibility that …",
+"The evidence from this study suggests that …",
+"Overall, this study strengthens the idea that …",
+"The current data highlight the importance of …",
+"The findings of this research provide insights for …",
+"The results of this research support the idea that …",
+"These data suggest that 主题 can be achieved through …",
+"The theoretical implications of these findings are unclear.",
+"The principal theoretical implication of this study is that …",
+"This study has raised important questions about the nature of …",
+"The following conclusions can be drawn from the present study …",
+"Taken together, these findings suggest a role for 主题 in promoting 同义词.",
+"The findings of this investigation complement those of earlier studies.",
+"These findings have significant implications for the understanding of how …",
+"Although this study focuses on 主题, the findings may well have a bearing on …,"
+]
+let 总意义 = [
+"The findings will be of interest to …",
+"This thesis has provided a deeper insight into …",
+"The findings reported here shed new light on …",
+"The study contributes to our understanding of …",
+"These results add to the rapidly expanding field of …",
+"The contribution of this study has been to confirm …",
+"Before this study, evidence of 主题 was purely anecdotal.",
+"This project is the first comprehensive investigation of …",
+"The insights gained from this study may be of assistance to …",
+"This work contributes to existing knowledge of 主题 by providing …",
+"This is the largest study so far documenting a delayed onset of …",
+"Prior to this study it was difficult to make predictions about how …",
+"The analysis of 主题 undertaken here, has extended our knowledge of …",
+"The empirical findings in this study provide a new understanding of …",
+"This paper contributes to recent historiographical debates concerning …",
+"This approach will prove useful in expanding our understanding of how …",
+"This new understanding should help to improve predictions of the impact of …",
+"This is the first report on 主题 from a nationally representative cohort of patients.",
+"The methods used for this 主题 may be applied to other 主题s elsewhere in the world.",
+"The 主题 that we have identified therefore assists in our understanding of the role of …",
+"This is the first study of substantial duration which examines associations between …",
+"The findings from this study make several contributions to the current literature. First,…",
+"These findings contribute in several ways to our understanding of 主题 and provide a basis for …",
+"Recognising the limitations of the current study",
+"A limitation of this study is that …",
+"Being limited to 主题, this study lacks …",
+"The small sample size did not allow …",
+"The major limitation of this study is the …",
+"This study was limited by the absence of …",
+"主题 makes these findings less generalisable to …",
+"Thirdly, the study did not evaluate the use of …",
+"It is unfortunate that the study did not include …",
+"The scope of this study was limited in terms of …",
+"The study is limited by the lack of information on …",
+"The most important limitation lies in the fact that …",
+"The main weakness of this study was the paucity of …",
+"Since the study was limited to 主题, it was not possible to ..",
+"An additional uncontrolled factor is the possibility that …",
+"It was not possible to assess 主题; therefore, it is unknown if …",
+"An issue that was not addressed in this study was whether…",
+"The generalisability of these results is subject to certain limitations. For instance, …",
+"One source of weakness in this study which could have affected the measurements of 主题 was …",
+]
+let 总缺陷 = [
+"Notwithstanding these limitations, the study suggests that …",
+"Whilst this study did not confirm 主题, it did partially substantiate …",
+"Despite its exploratory nature, this study offers some insight into …",
+"In spite of its limitations, the study certainly adds to our understanding of the …",
+"Notwithstanding the relatively limited sample, this work offers valuable insights into …",
+"Although the current study is based on a small sample of participants, the findings suggest …",
+]
+let 未工作 = [
 
+"The question raised by this study is …",
+"The study should be repeated using …",
+"This would be a fruitful area for further work.",
+"Several questions still remain to be answered.",
+"A natural progression of this work is to analyse …",
+"More research using controlled trials is needed to …",
+"More broadly, research is also needed to determine …",
+"A further study could assess the long-term effects of …",
+"What is now needed is a cross-national study involving …",
+"Considerably more work will need to be done to determine …",
+"The precise mechanism of 主题 in insects remains to be elucidated.",
+"These findings provide the following insights for future research: …",
+"Large randomised controlled trials could provide more definitive evidence.",
+"This research has thrown up many questions in need of further investigation.",
+"A greater focus on 主题 could produce interesting findings that account more for …",
+"The issue of 主题 is an intriguing one which could be usefully explored in further research.",
+"If the debate is to be moved forward, a better understanding of 主题 needs to be developed.",
+"I suggest that before 主题 is introduced, a study similar to this one should be carried out on …",
+"More information on 主题 would help us to establish a greater degree of accuracy on this matter.",
+"Setting out recommendations for practice or policy",
+"Other types of 主题 could include: a), b). …",
+"There is, therefore, a definite need for …",
+"Greater efforts are needed to ensure …",
+"Provision of 主题 will enhance 同义词 and reduce 近义词.",
+"Another important practical implication is that …",
+"Moreover, more 主题 should be made available to …",
+"The challenge now is to fabricate 主题s that contain …",
+"Unless governments adopt 主题, 同义词 will not be attained.",
+"These findings suggest several courses of action for …",
+"A reasonable approach to tackle this issue could be to …",
+"Continued efforts are needed to make 主题 more accessible to …",
+"The findings of this study have a number of practical implications.",
+"There are a number of important changes which need to be made.",
+"Management to enhance bumble-bee populations might involve …",
+"This study suggests that 主题 should be avoided by people who are prone to …",
+"A key policy priority should therefore be to plan for the long-term care of …",
+"This information can be used to develop targetted interventions aimed at …",
+"Taken together, these findings do not support strong recommendations to …",
+"Ensuring appropriate systems, services and support for 主题 should be a priority for …",
+"The findings of this study have a number of important implications for future practice.",
+]
+//其他
+let 作者 = [
+"Zhao",
+"Qian",
+"Sun",
+"Li",
+"Zhou",
+"Wu",
+"Zheng",
+"Wang",
+"Feng",
+"Chen",
+"Chu",
+"Wei",
+"Jiang",
+"Shen",
+"Han",
+"Yang",
+"Zhu",
+"Qin",
+"You",
+"Xu",
+"He",
+"Lu",
+"Shi",
+"Zhang",
+"Kong",
+"Cao",
+"Yan",
+"Hua",
+"Jin",
+"Wei",
+"Tao",
+"Jiang",
+]
+let 时间 = [
+"1989",
+"1990",
+"1991",
+"1992",
+"1993",
+"1994",
+"1995",
+"1996",
+"1997",
+"1998",
+"1999",
+"2000",
+"2001",
+"2002",
+"2003",
+"2004",
+"2005",
+"2006",
+"2007",
+"2008",
+"2009",
+"2010",
+"2011",
+"2012",
+"2013",
+"2014",
+"2015",
+"2016",
+"2017",
+"2018",
+"2019",
+"2020",
+]
+let 从句库 = [
+"从句 0",
+"从句 1",
+"从句 2",
+"从句 3",
+"从句 4",
+"从句 5",
+"从句 6",
+"从句 7",
+"从句 8",
+"从句 9",
+"从句 10",
+"从句 11",
+"从句 12",
+"从句 13",
+"从句 14",
+"从句 15",
+"从句 16",
+"从句 17",
+"从句 18",
+"从句 19",
+"从句 19",
+"从句 20",
+"从句 21",
+"从句 22",
+"从句 23",
+"从句 24",
+"从句 25",
+"从句 26",
+"从句 27",
+"从句 28",
+"从句 29",
+"从句 30",
+"从句 31",
+"从句 32",
+"从句 33",
+"从句 34",
+"从句 35",
+"从句 36",
+"从句 37",
+"从句 38",
+"从句 39",
+"从句 40",
+]
+//句库名称
+let 结果部分 = [
+结目的,
+结数据,
+正数据,
+负数据,
+两数据,
+亮数据,
+效数据,
+比数据,
+场数据,
+另数据,
+外数据,
+结过渡,
+分段,
+结目的,
+结数据,
+正数据,
+负数据,
+两数据,
+亮数据,
+效数据,
+比数据,
+场数据,
+另数据,
+外数据,
+结过渡,
+分段,
+结目的,
+结数据,
+正数据,
+负数据,
+两数据,
+亮数据,
+效数据,
+比数据,
+场数据,
+另数据,
+外数据,
+结过渡,
+结论点,
+]
+let 证言部分 = [
+泛相关,
+
+前人员,
+前时间,
+前研究,
+前话题,
+前关系,
+分段,
+远相关,
+前人员,
+前时间,
+前研究,
+前话题,
+前关系,
+分段,
+域相关,
+前人员,
+前时间,
+前研究,
+前话题,
+前关系,
+分段,
+近相关,
+前人员,
+前时间,
+前研究,
+前话题,
+前关系,
+分段,
+现相关,
+前做法,
+前人员,
+前时间,
+前研究,
+前话题,
+前关系,
+前总结,
+]
+let 方法部分 = [
+前方法,
+近方法,
+源方法,
+样本征,
+样本基,
+方法意,
+总步骤,
+被步骤,
+步骤前,
+步骤度,
+分段,
+方法意,
+总步骤,
+被步骤,
+步骤前,
+步骤度,
+分段,
+方法意,
+总步骤,
+被步骤,
+步骤前,
+步骤度,
+分段,
+分析器,
+方法缺,
+]
+let 讨论部分 = [
+重总证,
+重目的,
+重结果,
+解释,
+谨慎,
+假设,
+评论,
+分段,
+外结果,
+解释,
+谨慎,
+假设,
+评论,
+分段,
+重分证,
+解释,
+谨慎,
+假设,
+评论,
+分段,
+重反证,
+解释,
+谨慎,
+假设,
+评论,
+重建议,
+]
+let 结论部分 = [
+总声明,
+总发现,
+域发现,
+总发现,
+域发现,
+总发现,
+域发现,
+总缺陷,
+未工作,
+总声明,
+]
 //基本
-//输入
+//全局输入
 let 主题 = "Red"
 let	同义词 = "Blue"
 let	近义词 = "Orange"
 let	上级 = "colour"
 let 方法 = "measuring"
-let	特征 = "wave length"
-//let 
-//写入
+let	特征 = "length"
+//全局写入
 序列 = 0;
-局部序列 = 0;
+结果序列 = 0;
 局部序列1 = 0;
+章节 ="";
+//局部写入
 let 选中作者 = 作者[序列];
 let 选中时间 = 时间[序列];
+let 从句 = 从句库[局部序列1];
+let 结果小标题 = 结果部分[结果序列];
 //函数
 function 选数字(最小值 = 0,最大值 = 100){
-    let 数字 = Math.random()*( 最大值 - 最小值 ) + 最小值;
-    return 数字;
+	let 数字 = Math.random()*( 最大值 - 最小值 ) + 最小值;
+	return 数字;
 }
 function 选句子(列表){
-    let 坐标 = Math.floor( Math.random() * 列表.length );
-    return 列表[坐标];
-	列表.splice(坐标, 1, );
+	let 坐标 = Math.floor( Math.random() * 列表.length );
+	return 列表[坐标];
+	return 列表.splice(坐标, 1, );
 }
-function 写句子(列表){
-	var 选的句子 = 选句子(句子名称[局部序列]);
+function 写句子(){
+	var 选的句子 = 选句子(句库名称[局部序列]);
     var 写的句子 = 一套替换(选的句子);
     return 写的句子;
 	}
@@ -439,6 +1163,7 @@ String.prototype.替换=function(被替换,新替换){
     var reg=new RegExp(被替换,"g");
     return this.replace(reg,新替换);
 }
+
 function 一套替换(选的句子){
 	let 主题1 = "<font color=\"red\">"+主题+"</font>";
 	let 同义词1 = "<font color=\"blue\">"+同义词+"</font>";
@@ -452,8 +1177,6 @@ function 一套替换(选的句子){
     选的句子 = 选的句子.替换("上级",上级1);
 	选的句子 = 选的句子.替换("方法",方法1);
 	选的句子 = 选的句子.替换("特征",特征1);
-	选的句子 = 选的句子.替换("…" ,"写个宾语或从句");
-		//局部序列1 = 局部序列1 + 1;
 	if (选的句子.match("作者")){
 		let 选中作者 = "<b>"+作者[序列]+"</b>";
 		let 选中时间 = "<b>"+时间[序列]+"</b>";
@@ -470,218 +1193,125 @@ function 一套替换(选的句子){
 		序列 = 序列 + 1;
 		return 选的句子;
 		}
+	else if (选的句子.match("…")){
+		let 从句 = "<b>"+从句库[局部序列1]+"</b>";
+		选的句子 = 选的句子.替换("…" ,从句);
+		局部序列1 = 局部序列1 + 1;
+		return 选的句子;
+		}
 	else return 选的句子;
 	}
-
-function 写前方法1(){
-	var 前人方法 = 选句子(前方法1);
-    var 前人方法 = 一套替换(前人方法);
-	return 前人方法;
-}
-function 写方法缺(){
-	var 方法缺陷 = 选句子(方法缺);
-    var 方法缺陷 = 一套替换(方法缺陷);
-	return 方法缺陷;
-}
-function 写方法意(){
-	var 方法目的 = 选句子(方法意);
-    var 方法目的 = 一套替换(方法目的);
-	return 方法目的;
-}
-function 写源方法(){
-	var 方法来源 = 选句子(源方法);
-    var 方法来源 = 一套替换(方法来源);
-	return 方法来源;
-}
-function 写近方法(){
-	var 目前方法 = 选句子(近方法);
-    var 目前方法 = 一套替换(目前方法);
-	return 目前方法;
-}
-function 写总步骤(){
-	var 步骤总领 = 选句子(总步骤);
-    var 步骤总领 = 一套替换(步骤总领);
-	return 步骤总领;
-}
-function 写步骤前(){
-	var 步骤起始 = 选句子(步骤前);
-    var 步骤起始 = 一套替换(步骤起始);
-	return 步骤起始;
-}
-function 写被步骤(){
-	var 被动语态 = 选句子(被步骤);
-    var 被动语态 = 一套替换(被动语态);
-	return 被动语态;
-}
-function 写步骤度(){
-	var 特征提取 = 选句子(步骤度);
-    var 特征提取 = 一套替换(特征提取);
-	return 特征提取;
-}
-function 写样本基(){
-	var 取样基准 = 选句子(样本基);
-    var 取样基准 = 一套替换(取样基准);
-	return 取样基准;
-}
-function 写样本征(){
-	var 样本特征 = 选句子(样本征);
-    var 样本特征 = 一套替换(样本特征);
-	return 样本特征;
-}
-function 写分析器(){
-	var 分析装置 = 选句子(分析器);
-    var 分析装置 = 一套替换(分析装置);
-	return 分析装置;
-}
-
-function 生成方法(){
-    主题 = $("input[id='主题']").value
-	同义词 = $("input[id='同义词']").value
-	近义词 = $("input[id='近义词']").value
-	上级 = $("input[id='上级']").value
-	方法 = $("input[id='方法']").value
-	特征 = $("input[id='特征']").value
-	var 章节 = "<p>Method</p>";
-		if ( 1 == 1 ){
-			var 句子 = 写前方法1();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写方法缺();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写方法意();
-				章节 = 章节 + 句子 +" ";
-			var 句子 = 写源方法();
-				章节 = 章节 + 句子 +" ";
-			var 句子 = 写方法缺();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写近方法();
-				章节 = 章节 + 句子 +" ";
-			var 句子 = 写总步骤();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写步骤前();
-				章节 = 章节 + 句子 +" ";
-			var 句子 = 写被步骤();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写步骤度();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写样本基();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写样本征();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写分析器();
-				章节 = 章节 + 句子 +" ";
-			序列 = 0
-			局部序列1 = 0;
-            }
-    
-	document.getElementById("方法部分").innerHTML = 章节;
-}
-
-function 写泛相关(){
-	var 不太借鉴 = 选句子(泛相关);
-    var 不太借鉴 = 一套替换(不太借鉴);
-	return 不太借鉴;
-}
-function 写远相关(){
-	var 有点借鉴 = 选句子(远相关);
-    var 有点借鉴 = 一套替换(有点借鉴);
-    return 有点借鉴;
-}
-function 写域相关(){
-    var 领域借鉴 = 选句子(域相关);
-    var 领域借鉴 = 一套替换(领域借鉴);
-    return 领域借鉴;
-	
-}
-function 写近相关(){
-    var 历史借鉴 = 选句子(近相关);
-    var 历史借鉴 = 一套替换(历史借鉴);
-    return 历史借鉴;
-}
-function 写现相关(){
-    var 目前借鉴 = 选句子(现相关);
-    var 目前借鉴 = 一套替换(目前借鉴);
-    return 目前借鉴;
-}
-//
-function 写前方法(){
-    var 方法借鉴 = 选句子(前方法);
-    var 方法借鉴 = 一套替换(方法借鉴);
-    return 方法借鉴;
-}
-function 写前人员(){
-    var 思想借鉴 = 选句子(前人员);
-    var 思想借鉴 = 一套替换(思想借鉴);
-    return 思想借鉴;
-}
-function 写前时间(){
-    var 里程借鉴 = 选句子(前时间);
-    var 里程借鉴 = 一套替换(里程借鉴);
-    return 里程借鉴;
-}
-function 写前研究(){
-    var 结论借鉴 = 选句子(前研究);
-    var 结论借鉴 = 一套替换(结论借鉴);
-    return 结论借鉴;
-}
-function 写前话题(){
-    var 吹牛借鉴 = 选句子(前话题);
-    var 吹牛借鉴 = 一套替换(吹牛借鉴);
-    return 吹牛借鉴;
-}
-//
-function 写前关系(){
-    var 关系借鉴 = 选句子(前关系);
-    var 关系借鉴 = 一套替换(关系借鉴);
-    return 关系借鉴;
-}
-function 写前总结(){
-    var 总结借鉴 = 选句子(前总结);
-    var 总结借鉴 = 一套替换(总结借鉴);
-    return 总结借鉴;
-}
-
+function 写证言句子(){
+	var 章节 = "<p><b>Intro</b></p>";
+    while (结果序列 < 证言部分.length){
+		let 结果小标题 = 证言部分[结果序列];
+		let 选的句子 = 选句子(结果小标题);
+		let 写的句子 = 一套替换(选的句子) +" ";
+		章节 = 章节 + 写的句子;
+		结果序列 = 结果序列 + 1;
+	}
+		document.getElementById("证言区域").innerHTML = 章节;
+	}
 function 生成证言(){
-    主题 = $("input[id='主题']").value
+	主题 = $("input[id='主题']").value
 	同义词 = $("input[id='同义词']").value
 	近义词 = $("input[id='近义词']").value
 	上级 = $("input[id='上级']").value
-	//alert (序列);
-	var 章节 = "<p>Intro</p>";
-		if ( 2 == 2 ){
-			var 句子 = 写泛相关();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写远相关();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写域相关();
-				章节 = 章节 + 句子 +" ";
-			var 句子 = 写近相关();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写现相关();
-				章节 = 章节 + 句子 +" ";
-			var 句子 = 写前方法();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写前人员();
-				章节 = 章节 + 句子 +" ";
-			var 句子 = 写前时间();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写前研究();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写前话题();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写前关系();
-				章节 = 章节 + 句子 +" ";
-            var 句子 = 写前总结();
-				章节 = 章节 + 句子 +" ";
-			序列 = 0;
-			局部序列1 = 0;
-            }
-    
-	document.getElementById("证言部分").innerHTML = 章节;
-}
-function 讨厌的弹出(){
-	alert("声明：\n本作品使用反996许可证发布，仅供测试使用，\n请勿将生成的文章用于正规用途\n\n免责声明:\n在使用本作品前，请您务必仔细阅读并透彻理解本声明。您可以选择不使用本作品，但如果您使用本作品，您的使用行为将被视为对本声明全部内容的认可。\n本作品产生的文章由用户输入内容结合随机信息生成，版权人不保障生成文章的安全性、正确性、及时性、合法性，用户在使用过程中的风险由用户自行承担，版权人对用户使用本作品产生的内容其概不负责，亦不承担任何法律责任。\n任何本作品生成的链接地址均系第三方或用户生成，版权人对链接本身及由链接产生的内容概不负责，亦不承担任何法律责任。\n本作品产生的文章均由浏览器产生，无服务器端服务且无存储，版权人不对由用户产生的侵权行为负责，亦不承担任何法律责任。\n本作品不对用户使用过程中使用的任何第三方产品负责，亦不承担任何法律责任。\n本作品不对任何本作品使用的第三方服务负责，亦不承担任何法律责任。\n本作品不对任何基于本作品的衍生品负责，亦不承担任何法律责任。"); 
-	alert(
-	"许可证:\n\n非内容部分版权所有（c）2019-2020 meng ke, suulnnka, qtgt\n\n反996许可证版本1.0\n\n在符合下列条件的情况下，特此免费向任何得到本授权作品的副本（包括源代码、文件和/或相关内容，以下统称为“授权作品”）的个人和法人实体授权：被授权个人或法人实体有权以任何目的处置授权作品，包括但不限于使用、复制，修改，衍生利用、散布，发布和再许可：\n1. 个人或法人实体必须在许可作品的每个再散布或衍生副本上包含以上版权声明和本许可证，不得自行修改。\n2. 个人或法人实体必须严格遵守与个人实际所在地或个人出生地或归化地、或法人实体注册地或经营地（以较严格者为准）的司法管辖区所有适用的与劳动和就业相关法律、法规、规则和标准。如果该司法管辖区没有此类法律、法规、规章和标准或其法律、法规、规章和标准不可执行，则个人或法人实体必须遵守国际劳工标准的核心公约。\n3. 个人或法人不得以任何方式诱导、暗示或强迫其全职或兼职员工或其独立承包人以口头或书面形式同意直接或间接限制、削弱或放弃其所拥有的，受相关与劳动和就业有关的法律、法规、规则和标准保护的权利或补救措施，无论该等书面或口头协议是否被该司法管辖区的法律所承认，该等个人或法人实体也不得以任何方法限制其雇员或独立承包人向版权持有人或监督许可证合规情况的有关当局报告或投诉上述违反许可证的行为的权利。\n\n该授权作品是\"按原样\"提供，不做任何明示或暗示的保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，无论是在合同诉讼、侵权诉讼或其他诉讼中，版权持有人均不承担因本软件或本软件的使用或其他交易而产生、引起或与之相关的任何索赔、损害或其他责任。");}
+	if (1==1){
+	    写证言句子();
+		结果序列 = 0;
+		局部序列1 = 0;
+		}
+	}
+function 写方法句子(){
+	var 章节 = "<p><b>Methods</b></p>";
+    while (结果序列 < 方法部分.length){
+		let 结果小标题 = 方法部分[结果序列];
+		let 选的句子 = 选句子(结果小标题);
+		let 写的句子 = 一套替换(选的句子) +" ";
+		章节 = 章节 + 写的句子;
+		结果序列 = 结果序列 + 1;
+	}
+		document.getElementById("方法区域").innerHTML = 章节;
+	}
+function 生成方法(){
+	主题 = $("input[id='主题']").value
+	同义词 = $("input[id='同义词']").value
+	近义词 = $("input[id='近义词']").value
+	上级 = $("input[id='上级']").value
+	if (2==2){
+	    写方法句子();
+		结果序列 = 0;
+		局部序列1 = 0;
+		}
+	}
+function 写结果句子(){
+	var 章节 = "<p><b>Results</b></p>";
+    while (结果序列 < 结果部分.length){
+		let 结果小标题 = 结果部分[结果序列];
+		let 选的句子 = 选句子(结果小标题);
+		let 写的句子 = 一套替换(选的句子) +" ";
+		章节 = 章节 + 写的句子;
+		结果序列 = 结果序列 + 1;
+	}
+		document.getElementById("结果区域").innerHTML = 章节;
+	}
+function 生成结果(){
+	主题 = $("input[id='主题']").value
+	同义词 = $("input[id='同义词']").value
+	近义词 = $("input[id='近义词']").value
+	上级 = $("input[id='上级']").value
+	if (3==3){
+	    写结果句子();
+		结果序列 = 0;
+		局部序列1 = 0;
+		}
+	}
+function 写讨论句子(){
+	var 章节 = "<p><b>Discuss</b></p>";
+    while (结果序列 < 讨论部分.length){
+		let 结果小标题 = 讨论部分[结果序列];
+		let 选的句子 = 选句子(结果小标题);
+		let 写的句子 = 一套替换(选的句子) +" ";
+		章节 = 章节 + 写的句子;
+		结果序列 = 结果序列 + 1;
+	}
+		document.getElementById("讨论区域").innerHTML = 章节;
+	}
+function 生成讨论(){
+	主题 = $("input[id='主题']").value
+	同义词 = $("input[id='同义词']").value
+	近义词 = $("input[id='近义词']").value
+	上级 = $("input[id='上级']").value
+	if (4==4){
+	    写讨论句子();
+		结果序列 = 0;
+		局部序列1 = 0;
+		}
+	}
+function 写结论句子(){
+	var 章节 = "<p><b>Conclusion</b></p>";
+    while (结果序列 < 结论部分.length){
+		let 结果小标题 = 结论部分[结果序列];
+		let 选的句子 = 选句子(结果小标题);
+		let 写的句子 = 一套替换(选的句子) +" ";
+		章节 = 章节 + 写的句子;
+		结果序列 = 结果序列 + 1;
+	}
+		document.getElementById("结论区域").innerHTML = 章节;
+	}
+function 生成结论(){
+	主题 = $("input[id='主题']").value
+	同义词 = $("input[id='同义词']").value
+	近义词 = $("input[id='近义词']").value
+	上级 = $("input[id='上级']").value
+	if (5==5){
+	    写结论句子();
+		结果序列 = 0;
+		局部序列1 = 0;
+		序列 = 0;
+		}
+	}
 </script>
 <style>
   @media screen and (max-width: 1024px) {
@@ -748,6 +1378,27 @@ function 讨厌的弹出(){
       padding: 20px;
       background: #f8f8f8;
     }
+	#输入 input{
+      border: none;
+      border-bottom: #666666 2px solid;
+      padding: 1px 0 0 0;
+      margin: 0px 20px 0 20px;
+      vertical-align: baseline;
+      font-size: 1rem;
+      background: #f8f8f8;
+      color: #333333;
+      text-align: center;
+      min-width: 20%;
+    }
+	#输入 button{
+      border: 0;
+      padding: 5px 15px 5px 15px;
+      margin: 0;
+      vertical-align: top;
+      font-size: 0.75rem;
+      background: #454545;
+      color: #efefef;
+    }
 	#输出{
       border: 2px solid #333333;
       margin: 20px;
@@ -758,27 +1409,50 @@ function 讨厌的弹出(){
   }
  
 </style>
-<body>
-<p></p>
-<p></p>
 <div id = "输入">
 <p></p>
-<div><center><b>娱乐报告生成器 2019</b></center></div>
-<div><center><b>QtGt's Scigen for Horseplay Ver. 2019</b></center></div>
-<div style="color:red"><p>主题：<input type="text" value=Red name="主题" id="主题" class =输入></p></div>
-<div style="color:blue"><p>同义词：<input type="text" value=Blue name="同义词" id="同义词"  class =输入></p></div>
-<div style="color:orange"><p>近义词：<input type="text" value="Orange" name="近义词" id="近义词" class =输入></p></div>
-<div style="color:purple"><p>上级：<input type="text" value=colour name="上级" id="上级" class =输入></p></div>
-<div ><p><u>方法：</u><input type="text" value=measuring name="方法" id="方法" class =输入></p></div>
-<div ><p><i>特征：</i><input type="text" value="wave length" name="特征" id="特征" class =输入></p></div>
-<div><p><button onclick="生成证言();生成方法();讨厌的弹出()">生成娱乐版报告</button></p></div>
+<p></p>
+<div><center><b>报告语料生成器</b></center></div>
+<p></p>
+<div style="color:red">主题<input style= type="text" value=Red name="主题" id="主题"></div>
+<div style="color:blue">同义词<input style= type="text" value=Blue name="同义词" id="同义词"></div>
+<div style="color:orange">近义词<input style= type="text" value="Orange" name="近义词" id="近义词"></div>
+<div style="color:purple">上级<input style= type="text" value=colour name="上级" id="上级"></div>
+<div style= ><i>方法</i><input style= type="text" value=measuring name="方法" id="方法"></div>
+<div style= ><u>特征</u><input style= type="text" value="wave length" name="特征" id="特征"></div>
+<!-- <div>引用内容<input type="text" name="引用内容[]" value=引用内容 id="引用内容"></div> -->
+<p></p>
+
+<div><center><button onclick="生成证言();生成方法();生成结果();生成讨论(),生成结论()"><p>同意下方内容</p><p>并生成报告语料</p></button></center></div>
+<p></p>
+<p></p>
 </div>
 <div id = "输出">
-<div id="证言部分"><p>原版（Javascript 和 生成部分）<del> 照抄 </del>参考：<a href="https://github.com/menzi11/BullshitGenerator" target="_blank">@menzi11</a></p><p>网页版（样式和声明）<del> 照抄 </del>参考：<a href="https://github.com/suulnnka/BullshitGenerator" target="_blank">@suulnnka</a></p><p>主要参考文献：<a href="https://www.amazon.co.uk/The-Academic-Phrasebank-academic-resource-students-researchers-ebook/dp/B019INQ45Y" target="_blank">Morley, J. (2017). The academic phrasebank: An academic writing resource for students and researchers</a>.</p></div>
+<p></p>
+<p></p>
+<div id="证言区域"><p><b>声明：</b></p><p>本作品使用反996许可证发布，仅供测试使用，请勿将生成的文章用于正规用途</p><p>免责声明:</p><p>在使用本作品前，请您务必仔细阅读并透彻理解本声明。您可以选择不使用本作品，但如果您使用本作品，您的使用行为将被视为对本声明全部内容的认可。</p><p>本作品产生的文章由用户输入内容结合随机信息生成，版权人不保障生成文章的安全性、正确性、及时性、合法性，用户在使用过程中的风险由用户自行承担，版权人对用户使用本作品产生的内容其概不负责，亦不承担任何法律责任。</p><p>任何本作品生成的链接地址均系第三方或用户生成，版权人对链接本身及由链接产生的内容概不负责，亦不承担任何法律责任。</p><p>本作品产生的文章均由浏览器产生，无服务器端服务且无存储，版权人不对由用户产生的侵权行为负责，亦不承担任何法律责任。</p><p>本作品不对用户使用过程中使用的任何第三方产品负责，亦不承担任何法律责任。</p><p>本作品不对任何本作品使用的第三方服务负责，亦不承担任何法律责任。</p>本作品不对任何基于本作品的衍生品负责，亦不承担任何法律责任。<p></p></div>
 <p></p>
 <p></p>
 <p></p>
 <p></p>
-<div id="方法部分"><p>关于本版：首先，分写的wave length，是为了说明支持空格；再就是，由于本人并不真懂 CSS 和 Javascript，所以没有售后~~</p><p>© QtGt Studio (Not-Really-Existent-Yet) 2019-2020, all rights reserved. </p></div>
+<div id="方法区域"></div>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<div id="结果区域"><p><b>版本说明：</b></p><p>原版（Javascript 和 生成部分）<del> 照抄 </del>参考：<a href="https://github.com/menzi11/BullshitGenerator" target="_blank">@menzi11</a></p><p>网页版（样式和声明）<del> 照抄 </del>参考：<a href="https://github.com/suulnnka/BullshitGenerator" target="_blank">@suulnnka</a></p><p>主要参考文献：<a href="https://www.amazon.co.uk/The-Academic-Phrasebank-academic-resource-students-researchers-ebook/dp/B019INQ45Y" target="_blank">Morley, J. (2017). The academic phrasebank: An academic writing resource for students and researchers</a>.</p></div>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<div id="讨论区域"><p><b>关于本版：</p><p></b>首先，分写的wave length，是为了说明支持空格；再就是，由于本人并不真懂 CSS 和 Javascript，所以没有售后~~</p><p>© QtGt Studio (Not-Really-Existent-Yet) 2019-2020, all rights reserved. </p></div>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<div id="结论区域"><p><b>许可证：</b></p><p>非内容部分版权所有（c）2019-2020 meng ke, suulnnka, qtgt</p><p></p><p>反996许可证版本1.0</p><p></p><p>在符合下列条件的情况下，特此免费向任何得到本授权作品的副本（包括源代码、文件和/或相关内容，以下统称为“授权作品”）的个人和法人实体授权：被授权个人或法人实体有权以任何目的处置授权作品，包括但不限于使用、复制，修改，衍生利用、散布，发布和再许可：</p><p>1. 个人或法人实体必须在许可作品的每个再散布或衍生副本上包含以上版权声明和本许可证，不得自行修改。</p><p>2. 个人或法人实体必须严格遵守与个人实际所在地或个人出生地或归化地、或法人实体注册地或经营地（以较严格者为准）的司法管辖区所有适用的与劳动和就业相关法律、法规、规则和标准。如果该司法管辖区没有此类法律、法规、规章和标准或其法律、法规、规章和标准不可执行，则个人或法人实体必须遵守国际劳工标准的核心公约。</p><p>3. 个人或法人不得以任何方式诱导、暗示或强迫其全职或兼职员工或其独立承包人以口头或书面形式同意直接或间接限制、削弱或放弃其所拥有的，受相关与劳动和就业有关的法律、法规、规则和标准保护的权利或补救措施，无论该等书面或口头协议是否被该司法管辖区的法律所承认，该等个人或法人实体也不得以任何方法限制其雇员或独立承包人向版权持有人或监督许可证合规情况的有关当局报告或投诉上述违反许可证的行为的权利。</p><p>该授权作品是\"按原样\"提供，不做任何明示或暗示的保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，无论是在合同诉讼、侵权诉讼或其他诉讼中，版权持有人均不承担因本软件或本软件的使用或其他交易而产生、引起或与之相关的任何索赔、损害或其他责任。</p></div>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
 </div>
-</body>
